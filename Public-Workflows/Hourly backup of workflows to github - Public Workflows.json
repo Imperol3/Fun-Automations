@@ -265,7 +265,7 @@
         },
         "repository": {
           "__rl": true,
-          "value": "={{ $('Loop Over Items').item.json.repo.name }}",
+          "value": "Fun-Automations",
           "mode": "name"
         },
         "filePath": "={{$node[\"Globals\"].json[\"repo\"][\"path\"]}}{{$json[\"name\"]}}.json",
@@ -705,6 +705,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-13T07:00:43.411Z",
-  "versionId": "159f5d67-1f0c-4b2d-b359-00c009e11d0a"
+  "updatedAt": "2024-12-13T07:06:58.312Z",
+  "versionId": "e911d769-79c0-459c-9f55-1c69802d8c2f"
 }

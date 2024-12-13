@@ -1,0 +1,831 @@
+{
+  "active": true,
+  "connections": {
+    "techical analyis ✅2": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "techical analyis ✅": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook✅",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Receive url to scrap": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Set Get fields✅": {
+      "main": [
+        [
+          {
+            "node": "techical analyis ✅2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Post fields✅": {
+      "main": [
+        [
+          {
+            "node": "techical analyis ✅",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "XML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "XML": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Set Get fields✅",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Upsert data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-12-07T05:14:55.750Z",
+  "id": "VojEvVdjrKvzjbkE",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Technical Analysis Report to Sheets",
+  "nodes": [
+    {
+      "parameters": {
+        "jsCode": "const cheerio = require('cheerio');\nconst axios = require('axios');\n\nreturn Promise.all(items.map(async (item) => {\n  const url = item.json.url;\n\n  if (!url) {\n    return { json: { error: \"No URL provided\" } };\n  }\n\n  try {\n    // Fetch the HTML content from the URL\n    const response = await axios.get(url);\n    const html = response.data;\n\n    // Load HTML into Cheerio\n    const $ = cheerio.load(html);\n\n    // Extract the title tag\n    const title = $('title').text() || \"No title found\";\n\n    // Extract the meta description\n    const metaDescription = $('meta[name=\"description\"]').attr('content') || \"No description found\";\n\n    // Extract the canonical URL\n    const canonical = $('link[rel=\"canonical\"]').attr('href') || \"No canonical URL found\";\n\n    // Extract all headings (H1, H2, H3, etc.)\n    const headings = [];\n    $('h1, h2, h3, h4, h5, h6').each((i, el) => {\n      headings.push({\n        level: el.name,\n        text: $(el).text().trim()\n      });\n    });\n\n    // Extract internal and external links with anchor texts\n    const internalLinks = [];\n    const externalLinks = [];\n    $('a').each((i, el) => {\n      const href = $(el).attr('href');\n      const anchorText = $(el).text().trim();\n\n      if (href) {\n        if (href.startsWith('/') || href.includes(url)) {\n          internalLinks.push({ href, anchorText: anchorText || \"No anchor text\" });\n        } else {\n          externalLinks.push({ href, anchorText: anchorText || \"No anchor text\" });\n        }\n      }\n    });\n\n    // Extract robots meta tag\n    const robotsMeta = $('meta[name=\"robots\"]').attr('content') || \"No robots meta found\";\n\n    // Extract Open Graph tags\n    const ogTags = {};\n    $('meta[property^=\"og:\"]').each((i, el) => {\n      const property = $(el).attr('property');\n      const content = $(el).attr('content');\n      if (property && content) {\n        ogTags[property.replace('og:', '')] = content;\n      }\n    });\n\n    // Extract structured data (JSON-LD)\n    const structuredData = [];\n    $('script[type=\"application/ld+json\"]').each((i, el) => {\n      try {\n        const json = JSON.parse($(el).html());\n        structuredData.push(json);\n      } catch (error) {\n        // Ignore invalid JSON\n      }\n    });\n\n    // Extract image details\n    const images = [];\n    $('img').each((i, el) => {\n      images.push({\n        src: $(el).attr('src') || \"No source\",\n        alt: $(el).attr('alt') || \"No alt text\",\n        width: $(el).attr('width') || \"No width\",\n        height: $(el).attr('height') || \"No height\"\n      });\n    });\n\n    // Analyze viewport meta tag\n    const viewportMeta = $('meta[name=\"viewport\"]').attr('content') || \"No viewport meta tag\";\n\n    // Calculate word count\n    const wordCount = $('body').text().split(/\\s+/).filter(word => word.length > 0).length;\n\n    // Check for missing alt attributes\n    const imagesWithoutAlt = images.filter(img => img.alt === \"No alt text\").length;\n\n    // Return the structured result\n    return {\n      json: {\n        url,\n        title,\n        metaDescription,\n        canonical,\n        headings,\n        internalLinks,\n        externalLinks,\n        robotsMeta,\n        openGraph: ogTags,\n        structuredData,\n        images,\n        imageAnalysis: {\n          totalImages: images.length,\n          imagesWithoutAlt\n        },\n        viewportMeta,\n        wordCount\n      }\n    };\n\n  } catch (error) {\n    return { json: { error: `Failed to fetch URL: ${url}`, details: error.message } };\n  }\n}));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        340
+      ],
+      "id": "9f77e847-95fa-48b3-b3d2-0d9250b4972e",
+      "name": "techical analyis ✅2"
+    },
+    {
+      "parameters": {
+        "jsCode": "const cheerio = require('cheerio');\nconst axios = require('axios');\n\nreturn Promise.all(items.map(async (item) => {\n  const url = item.json.url;\n\n  if (!url) {\n    return { json: { error: \"No URL provided\" } };\n  }\n\n  try {\n    // Fetch the HTML content from the URL\n    const response = await axios.get(url);\n    const html = response.data;\n\n    // Load HTML into Cheerio\n    const $ = cheerio.load(html);\n\n    // Extract the title tag\n    const title = $('title').text() || \"No title found\";\n\n    // Extract the meta description\n    const metaDescription = $('meta[name=\"description\"]').attr('content') || \"No description found\";\n\n    // Extract the canonical URL\n    const canonical = $('link[rel=\"canonical\"]').attr('href') || \"No canonical URL found\";\n\n    // Extract all headings (H1, H2, H3, etc.)\n    const headings = [];\n    $('h1, h2, h3, h4, h5, h6').each((i, el) => {\n      headings.push({\n        level: el.name,\n        text: $(el).text().trim()\n      });\n    });\n\n    // Extract internal and external links with anchor texts\n    const internalLinks = [];\n    const externalLinks = [];\n    $('a').each((i, el) => {\n      const href = $(el).attr('href');\n      const anchorText = $(el).text().trim();\n\n      if (href) {\n        if (href.startsWith('/') || href.includes(url)) {\n          internalLinks.push({ href, anchorText: anchorText || \"No anchor text\" });\n        } else {\n          externalLinks.push({ href, anchorText: anchorText || \"No anchor text\" });\n        }\n      }\n    });\n\n    // Extract robots meta tag\n    const robotsMeta = $('meta[name=\"robots\"]').attr('content') || \"No robots meta found\";\n\n    // Extract Open Graph tags\n    const ogTags = {};\n    $('meta[property^=\"og:\"]').each((i, el) => {\n      const property = $(el).attr('property');\n      const content = $(el).attr('content');\n      if (property && content) {\n        ogTags[property.replace('og:', '')] = content;\n      }\n    });\n\n    // Extract structured data (JSON-LD)\n    const structuredData = [];\n    $('script[type=\"application/ld+json\"]').each((i, el) => {\n      try {\n        const json = JSON.parse($(el).html());\n        structuredData.push(json);\n      } catch (error) {\n        // Ignore invalid JSON\n      }\n    });\n\n    // Extract image details\n    const images = [];\n    $('img').each((i, el) => {\n      images.push({\n        src: $(el).attr('src') || \"No source\",\n        alt: $(el).attr('alt') || \"No alt text\",\n        width: $(el).attr('width') || \"No width\",\n        height: $(el).attr('height') || \"No height\"\n      });\n    });\n\n    // Analyze viewport meta tag\n    const viewportMeta = $('meta[name=\"viewport\"]').attr('content') || \"No viewport meta tag\";\n\n    // Calculate word count\n    const wordCount = $('body').text().split(/\\s+/).filter(word => word.length > 0).length;\n\n    // Check for missing alt attributes\n    const imagesWithoutAlt = images.filter(img => img.alt === \"No alt text\").length;\n\n    // Return the structured result\n    return {\n      json: {\n        url,\n        title,\n        metaDescription,\n        canonical,\n        headings,\n        internalLinks,\n        externalLinks,\n        robotsMeta,\n        openGraph: ogTags,\n        structuredData,\n        images,\n        imageAnalysis: {\n          totalImages: images.length,\n          imagesWithoutAlt\n        },\n        viewportMeta,\n        wordCount\n      }\n    };\n\n  } catch (error) {\n    return { json: { error: `Failed to fetch URL: ${url}`, details: error.message } };\n  }\n}));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1220,
+        840
+      ],
+      "id": "7c16d557-6622-41e1-8877-551ad496acdb",
+      "name": "techical analyis ✅"
+    },
+    {
+      "parameters": {
+        "multipleMethods": true,
+        "httpMethod": [
+          "POST"
+        ],
+        "path": "d89a2904-3962-485a-a90f-2231e4450d6d",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        340,
+        -300
+      ],
+      "id": "9371098a-d6a7-4120-bf00-cc190a9667fe",
+      "name": "Receive url to scrap",
+      "webhookId": "d89a2904-3962-485a-a90f-2231e4450d6d"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1460,
+        840
+      ],
+      "id": "86cfd04d-b99c-4831-b1d9-9ab7c31bed2f",
+      "name": "Respond to Webhook✅"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1820,
+        920
+      ],
+      "id": "156aded3-0b48-4870-a8d1-edb4933eebed",
+      "name": "Respond to Webhook✅1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8cf122c2-6b60-433e-b3a9-90bd800186f3",
+              "name": "url",
+              "value": "={{ $json.loc ? (($json.loc.startsWith('https://') ? '' : 'https://') + $json.loc) : '' }}",
+              "type": "string"
+            },
+            {
+              "id": "af70e426-dce8-4f11-ad1e-61fedfda3c75",
+              "name": "priority",
+              "value": "={{ $json.priority }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1020,
+        340
+      ],
+      "id": "2fe29e8f-ef32-4f6f-ac4e-2b9ef0fe42e2",
+      "name": "Set Get fields✅"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8cf122c2-6b60-433e-b3a9-90bd800186f3",
+              "name": "url",
+              "value": "={{ \n  ($json['Enter URL'] || $json.query.website) \n    ? (\n        ($json['Enter URL'] || $json.query.website).startsWith('https://') \n          ? ($json['Enter URL'] || $json.query.website)\n          : ($json['Enter URL'] || $json.query.website).startsWith('http://') \n            ? 'https://' + ($json['Enter URL'] || $json.query.website).slice(7) \n            : 'https://' + ($json['Enter URL'] || $json.query.website)\n      )\n    : '' \n}}",
+              "type": "string"
+            },
+            {
+              "id": "475dd504-85ad-4c08-b858-4ad0bcf4f682",
+              "name": "variable",
+              "value": "={{ $json.params.variable }}",
+              "type": "string"
+            },
+            {
+              "id": "f7ad206d-49a3-459b-94a0-84be77575eec",
+              "name": "authorization",
+              "value": "={{ $json.headers.authorization }}",
+              "type": "string"
+            },
+            {
+              "id": "b3ecfb07-468d-4d7b-9453-50b390de5007",
+              "name": "sheet-url",
+              "value": "={{ $json.headers['sheet-url'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1020,
+        760
+      ],
+      "id": "62b95d03-30ce-414b-a7f7-376367309feb",
+      "name": "Set Post fields✅"
+    },
+    {
+      "parameters": {
+        "content": "## Technical Analysis and geneerate HTML Beautified\n\nconst cheerio = require('cheerio');\nconst axios = require('axios');\n\nreturn Promise.all(items.map(async (item) => {\n  const url = item.json.url;\n\n  if (!url) {\n    return { json: { error: \"No URL provided\" } };\n  }\n\n  try {\n    const response = await axios.get(url);\n    const html = response.data;\n    const $ = cheerio.load(html);\n\n    // Improved title extraction and cleaning\n    let title = $('title').text() || \"No title found\";\n    title = title\n      .replace(/\\s*Icon\\w+/g, '')  // Remove Icon references\n      .replace(/([a-z])([A-Z])/g, '$1 $2')  // Add space between camelCase\n      .replace(/\\s+/g, ' ')  // Remove extra spaces\n      .split(/\\s+/)  // Split into words\n      .filter((word, index, arr) => arr.indexOf(word) === index)  // Remove duplicates\n      .join(' ')  // Join back with spaces\n      .trim();  // Clean up extra spaces\n\n    const metaDescription = $('meta[name=\"description\"]').attr('content') || \"No description found\";\n    const canonical = $('link[rel=\"canonical\"]').attr('href') || \"No canonical URL found\";\n    const headings = [];\n    $('h1, h2, h3, h4, h5, h6').each((i, el) => {\n      headings.push({\n        level: el.name,\n        text: $(el).text().trim()\n      });\n    });\n    const internalLinks = [];\n    const externalLinks = [];\n    $('a').each((i, el) => {\n      const href = $(el).attr('href');\n      const anchorText = $(el).text().trim();\n      if (href) {\n        if (href.startsWith('/') || href.includes(url)) {\n          internalLinks.push({ href, anchorText: anchorText || \"No anchor text\" });\n        } else {\n          externalLinks.push({ href, anchorText: anchorText || \"No anchor text\" });\n        }\n      }\n    });\n\n    const robotsMeta = $('meta[name=\"robots\"]').attr('content') || \"No robots meta found\";\n    const ogTags = {};\n    $('meta[property^=\"og:\"]').each((i, el) => {\n      const property = $(el).attr('property');\n      const content = $(el).attr('content');\n      if (property && content) {\n        ogTags[property.replace('og:', '')] = content;\n      }\n    });\n\n    const structuredData = [];\n    $('script[type=\"application/ld+json\"]').each((i, el) => {\n      try {\n        const json = JSON.parse($(el).html());\n        structuredData.push(json);\n      } catch (error) {\n        // Ignore invalid JSON\n      }\n    });\n\n    const images = [];\n    $('img').each((i, el) => {\n      images.push({\n        src: $(el).attr('src') || \"No source\",\n        alt: $(el).attr('alt') || \"No alt text\",\n        width: $(el).attr('width') || \"No width\",\n        height: $(el).attr('height') || \"No height\"\n      });\n    });\n\n    const viewportMeta = $('meta[name=\"viewport\"]').attr('content') || \"No viewport meta tag\";\n    const wordCount = $('body').text().split(/\\s+/).filter(word => word.length > 0).length;\n    const imagesWithoutAlt = images.filter(img => img.alt === \"No alt text\").length;\n\n    const htmlContent = `\n    <!DOCTYPE html>\n    <html lang=\"en\">\n    <head>\n      <meta charset=\"UTF-8\">\n      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n      <style>\n        :root {\n          --primary-color: #2563eb;\n          --secondary-color: #1e40af;\n          --text-color: #1f2937;\n          --border-color: #e5e7eb;\n          --background-color: #f9fafb;\n          --success-color: #059669;\n        }\n\n        body {\n          font-family: system-ui, -apple-system, sans-serif;\n          margin: 0;\n          padding: 0;\n          background-color: var(--background-color);\n          color: var(--text-color);\n          line-height: 1.5;\n        }\n\n        .container {\n          max-width: 1200px;\n          margin: 2rem auto;\n          padding: 0 1.5rem;\n        }\n\n        .header {\n          background: linear-gradient(to right, var(--primary-color), var(--secondary-color));\n          color: white;\n          padding: 2rem;\n          border-radius: 12px;\n          margin-bottom: 2rem;\n          box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);\n        }\n\n        .header h1 {\n          margin: 0;\n          font-size: 1.875rem;\n          font-weight: 600;\n          word-wrap: break-word;\n          line-height: 1.2;\n        }\n\n        .section {\n          background: white;\n          border-radius: 8px;\n          padding: 1.5rem;\n          margin-bottom: 1.5rem;\n          box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);\n        }\n\n        .section h2 {\n          color: var(--primary-color);\n          font-size: 1.25rem;\n          margin-top: 0;\n          margin-bottom: 1rem;\n          padding-bottom: 0.5rem;\n          border-bottom: 2px solid var(--border-color);\n        }\n\n        .section h3 {\n          color: var(--secondary-color);\n          font-size: 1.125rem;\n          margin: 1.5rem 0 1rem;\n        }\n\n        table {\n          width: 100%;\n          border-collapse: collapse;\n          margin: 1rem 0;\n          font-size: 0.875rem;\n        }\n\n        th, td {\n          padding: 0.75rem 1rem;\n          text-align: left;\n          border: 1px solid var(--border-color);\n          word-break: break-word;\n        }\n\n        th {\n          background-color: var(--background-color);\n          font-weight: 600;\n        }\n\n        tr:hover {\n          background-color: var(--background-color);\n        }\n\n        .image-table img {\n          max-width: 120px;\n          border-radius: 4px;\n          object-fit: cover;\n        }\n\n        ul {\n          list-style-type: none;\n          padding: 0;\n          margin: 0;\n        }\n\n        ul li {\n          padding: 0.5rem 0;\n          border-bottom: 1px solid var(--border-color);\n        }\n\n        ul li:last-child {\n          border-bottom: none;\n        }\n\n        pre {\n          background-color: var(--background-color);\n          padding: 1rem;\n          border-radius: 6px;\n          overflow-x: auto;\n          font-size: 0.875rem;\n          white-space: pre-wrap;\n          word-wrap: break-word;\n        }\n\n        .stats-grid {\n          display: grid;\n          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));\n          gap: 1rem;\n          margin-bottom: 1rem;\n        }\n\n        .stat-card {\n          background: var(--background-color);\n          padding: 1rem;\n          border-radius: 6px;\n          text-align: center;\n        }\n\n        .stat-card .value {\n          font-size: 1.5rem;\n          font-weight: 600;\n          color: var(--primary-color);\n        }\n\n        .stat-card .label {\n          font-size: 0.875rem;\n          color: var(--text-color);\n          margin-top: 0.5rem;\n        }\n\n        @media (max-width: 768px) {\n          .container {\n            padding: 0 1rem;\n          }\n          \n          .header {\n            padding: 1.5rem;\n          }\n          \n          table {\n            display: block;\n            overflow-x: auto;\n          }\n\n          .header h1 {\n            font-size: 1.5rem;\n          }\n        }\n      </style>\n    </head>\n    <body>\n      <div class=\"container\">\n        <div class=\"header\">\n          <h1>Technical SEO Analysis: ${title}</h1>\n        </div>\n        \n        <div class=\"section\">\n          <h2>Key Metrics</h2>\n          <div class=\"stats-grid\">\n            <div class=\"stat-card\">\n              <div class=\"value\">${wordCount}</div>\n              <div class=\"label\">Word Count</div>\n            </div>\n            <div class=\"stat-card\">\n              <div class=\"value\">${imagesWithoutAlt}</div>\n              <div class=\"label\">Images Missing Alt Text</div>\n            </div>\n            <div class=\"stat-card\">\n              <div class=\"value\">${internalLinks.length}</div>\n              <div class=\"label\">Internal Links</div>\n            </div>\n            <div class=\"stat-card\">\n              <div class=\"value\">${externalLinks.length}</div>\n              <div class=\"label\">External Links</div>\n            </div>\n          </div>\n        </div>\n\n        <div class=\"section\">\n          <h2>Meta Information</h2>\n          <table>\n            <tr><th>Title</th><td>${title}</td></tr>\n            <tr><th>Meta Description</th><td>${metaDescription}</td></tr>\n            <tr><th>Canonical URL</th><td>${canonical}</td></tr>\n            <tr><th>Robots Meta</th><td>${robotsMeta}</td></tr>\n            <tr><th>Viewport Meta</th><td>${viewportMeta}</td></tr>\n          </table>\n        </div>\n\n        <div class=\"section\">\n          <h2>Content Structure</h2>\n          <h3>Headings Hierarchy</h3>\n          <ul>\n            ${headings.map(h => `<li><strong>${h.level}</strong>: ${h.text}</li>`).join('')}\n          </ul>\n        </div>\n\n        <div class=\"section\">\n          <h2>Link Analysis</h2>\n          <h3>Internal Links</h3>\n          <table>\n            <tr><th>Anchor Text</th><th>URL</th></tr>\n            ${internalLinks.map(link => `<tr><td>${link.anchorText}</td><td><a href=\"${link.href}\">${link.href}</a></td></tr>`).join('')}\n          </table>\n\n          <h3>External Links</h3>\n          <table>\n            <tr><th>Anchor Text</th><th>URL</th></tr>\n            ${externalLinks.map(link => `<tr><td>${link.anchorText}</td><td><a href=\"${link.href}\">${link.href}</a></td></tr>`).join('')}\n          </table>\n        </div>\n\n        <div class=\"section\">\n          <h2>Open Graph Tags</h2>\n          <table>\n            ${Object.entries(ogTags).map(([key, value]) => `<tr><th>${key}</th><td>${value}</td></tr>`).join('')}\n          </table>\n        </div>\n\n        <div class=\"section\">\n          <h2>Image Analysis</h2>\n          <table class=\"image-table\">\n            <tr><th>Image</th><th>Alt Text</th><th>Dimensions</th></tr>\n            ${images.map(img => `\n              <tr>\n                <td><img src=\"${img.src}\" alt=\"${img.alt}\" width=\"100\"></td>\n                <td>${img.alt}</td>\n                <td>${img.width} × ${img.height}</td>\n              </tr>\n            `).join('')}\n          </table>\n        </div>\n\n        <div class=\"section\">\n          <h2>Structured Data</h2>\n          <pre>${JSON.stringify(structuredData, null, 2)}</pre>\n        </div>\n      </div>\n    </body>\n    </html>\n    `;\n\n    return { json: { html: htmlContent } };\n\n  } catch (error) {\n    return { json: { error: `Failed to fetch URL: ${url}`, details: error.message } };\n  }\n}));",
+        "height": 327,
+        "width": 283
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        96,
+        360
+      ],
+      "typeVersion": 1,
+      "id": "946e2dcd-fcf8-4f06-a3b3-b02656e2169f",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## 'Technical Analysis API✅':\n\n### Understanding the Workflow:\n1. **Node: techical analyis ✅2**\n- **Function**: Executes a JavaScript code block to scrape a given URL for SEO-related data.\n- **Input**: A JSON object containing a URL.\n- **Output**: Extracted information, including title, meta descriptions, canonical links, headings, internal and external links, and image details.\n\n2. **Node: techical analyis ✅**\n- **Function**: Similar to the previous node, it also performs scraping and data extraction.\n- **Input/Output**: Same as the above.\n\n3. **Node: Receive url to scrap**\n- **Function**: Waits for incoming web requests that will provide the URL to be analyzed.\n- **Input**: Expects a webhook call with user-specified URL.\n- **Output**: Triggers the next nodes upon receiving a request.\n\n4. **Node: Respond to Webhook**\n- **Function**: Sends back a response to the webhook call.\n- **Input/Output**: Takes the processed data from previous nodes and responds accordingly.\n\n5. **Node: Set Get fields**\n- **Function**: Prepares data received from the webhook for processing.\n- **Input**: Incoming parameters.\n- **Output**: Sets fields for further processing.\n\n6. **Node: Set Post fields**\n- **Function**: Similar to the previous node but prepares fields for a POST type.\n\n### Setup Instructions:\n1. **Prerequisites**:\n- You need to have n8n set up and running.\n- Install necessary modules such as `cheerio` and `axios`.\n- Ensure you have API keys or tokens required for authorization.\n\n2. **Importing the Workflow**:\n- Go to n8n, and import the provided JSON definition of the workflow.\n\n3. **Configuring Nodes**:\n- Check webhook configurations to ensure they meet your server settings.\n- Set any required parameters in the Set Get and Set Post fields nodes.\n\n4. **Customizing the Workflow**:\n- If desired, customize the URLs or add additional processing in the JavaScript code as needed.\n\n### Use Case Examples:\n- SEO Agencies looking to analyze multiple URLs for optimization.\n- Digital marketers assessing website content and structure before campaigns.\n- Web developers needing regular site audits for improvements.\n\n### Running and Troubleshooting:\n1. **Running the Workflow**:\n- Trigger the workflow by sending a webhook request with the target URL.\n\n2. **Monitoring Execution**:\n- Use n8n's built-in execution data to monitor the completion and results.\n\n3. **Troubleshooting Tips**:\n- Ensure that the URL provided is correct and reachable.\n- Check console logs for any errors, especially with external requests in the nodes.\n- Validate the input data format for each node to prevent flow breaks.",
+        "height": 332,
+        "width": 292
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        400,
+        360
+      ],
+      "typeVersion": 1,
+      "id": "0550f674-eced-486e-a156-aba740bc8a6c",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        840,
+        100
+      ],
+      "id": "767d944a-b2eb-44eb-a294-cbc8ca2d311b",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.sitemap }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1180,
+        100
+      ],
+      "id": "e127dc98-9d2a-4d0a-b3fb-9d8e6247fa9a",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.xml",
+      "typeVersion": 1,
+      "position": [
+        1360,
+        100
+      ],
+      "id": "fe8ec5c9-0e6d-48ad-ae9a-e018cd7670d6",
+      "name": "XML"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "urlset.url",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        1540,
+        100
+      ],
+      "id": "57d00551-b2a8-4bc3-af01-8bb49eb36eea",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "9ae37101-9991-4514-a96d-55c5f4a9cd6f",
+              "leftValue": "={{ $json.loc }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1700,
+        100
+      ],
+      "id": "7593acf7-6975-4ac2-81d2-d0b5b695b690",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4172319a-d49e-4752-a82d-f20452e4f276",
+              "name": "sitemap",
+              "value": "https://mailsafi.com/sitemap.xml",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1000,
+        100
+      ],
+      "id": "8ebfebd6-77dd-4c6d-8da8-a40455ff20e8",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "maxItems": 10
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        1880,
+        100
+      ],
+      "id": "a05e1039-4e13-4457-bc7c-2f32ef528645",
+      "name": "Limit",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "10hSuGOOf14YvVY2Bw8WXUIpsyXO614l7qNEjkyVY_Qg",
+          "mode": "list",
+          "cachedResultName": "N8n template for SEARCH CONSOLE REPORTING",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/10hSuGOOf14YvVY2Bw8WXUIpsyXO614l7qNEjkyVY_Qg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 151877170,
+          "mode": "list",
+          "cachedResultName": "On Page Analysis",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/10hSuGOOf14YvVY2Bw8WXUIpsyXO614l7qNEjkyVY_Qg/edit#gid=151877170"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "url"
+          ],
+          "schema": [
+            {
+              "id": "url",
+              "displayName": "url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "metaDescription",
+              "displayName": "metaDescription",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "canonical",
+              "displayName": "canonical",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "headings",
+              "displayName": "headings",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "internalLinks",
+              "displayName": "internalLinks",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "externalLinks",
+              "displayName": "externalLinks",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "robotsMeta",
+              "displayName": "robotsMeta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "openGraph",
+              "displayName": "openGraph",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "structuredData",
+              "displayName": "structuredData",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "images",
+              "displayName": "images",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "imageAnalysis",
+              "displayName": "imageAnalysis",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "viewportMeta",
+              "displayName": "viewportMeta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "wordCount",
+              "displayName": "wordCount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ]
+        },
+        "options": {
+          "handlingExtraData": "insertInNewColumn"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1580,
+        340
+      ],
+      "id": "111413a5-752d-4263-97df-3ad3bc41e895",
+      "name": "Upsert data",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ZAI2a6Qt80kX5a9s",
+          "name": "Google Sheets account✅ "
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bcc0de18-e04d-4522-a462-c0a130a88295",
+              "name": "internalLinks count",
+              "value": "={{ $json.internalLinks.length }}",
+              "type": "number"
+            },
+            {
+              "id": "dfaa4292-72e8-4eb5-b175-9be45204c1ac",
+              "name": "externalLinks count",
+              "value": "={{ $json.externalLinks.length }}",
+              "type": "number"
+            },
+            {
+              "id": "34f9aae8-66b9-4a95-b9de-17ad59f8c973",
+              "name": "totalImages",
+              "value": "=",
+              "type": "string"
+            },
+            {
+              "id": "43a4178c-0136-422d-90a6-50b74e7d43d0",
+              "name": "imagesWithoutAlt",
+              "value": "={{ $json.imageAnalysis.imagesWithoutAlt }}",
+              "type": "number"
+            },
+            {
+              "id": "e4f22d38-fe71-41ae-9a7c-f1c691b91359",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "include": "except",
+        "excludeFields": "imageAnalysis",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1360,
+        340
+      ],
+      "id": "a242466c-80b6-46f5-96df-9eddf3e41914",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const axios = require('axios');\nconst cheerio = require('cheerio');\n\n// Function to fetch the page content\nasync function fetchPage(url) {\n    try {\n        const response = await axios.get(url, {\n            headers: {\n                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',\n                'Accept-Language': 'en-US,en;q=0.9',\n            },\n        });\n        return response.data;\n    } catch (error) {\n        throw new Error(`Failed to fetch URL: ${url} - ${error.message}`);\n    }\n}\n\n// Function to extract clean content (headings, paragraphs, and main body)\nfunction extractMainContent(html) {\n    const $ = cheerio.load(html);\n\n    // Remove unwanted elements like scripts, styles, and forms\n    $('script, style, noscript, form, iframe, footer, header, nav, aside').remove();\n\n    // Extract body content (headings and paragraphs only)\n    let cleanContent = '';\n    \n    // Extract headings\n    $('h1, h2, h3, h4, h5, h6').each((i, el) => {\n        cleanContent += `\\n# ${$(el).text().trim()}\\n\\n`;\n    });\n\n    // Extract paragraphs\n    $('p').each((i, el) => {\n        cleanContent += `${$(el).text().trim()}\\n\\n`;\n    });\n\n    // Optionally extract other elements (like lists)\n    $('ul, ol').each((i, el) => {\n        $(el).find('li').each((j, li) => {\n            cleanContent += `- ${$(li).text().trim()}\\n`;\n        });\n    });\n\n    return cleanContent.trim();\n}\n\n// Main workflow function to fetch and clean the content\nasync function main() {\n    const urls = $input.all().map(item => item.json.url); // Accessing the URLs from the input\n\n    const results = [];\n    for (const url of urls) {\n        try {\n            const html = await fetchPage(url);\n            const cleanContent = extractMainContent(html);\n\n            // Return the clean content\n            results.push({\n                url,\n                cleanContent,\n            });\n        } catch (error) {\n            results.push({\n                url,\n                error: error.message,\n            });\n        }\n    }\n\n    return results;\n}\n\nreturn await main();\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1340,
+        860
+      ],
+      "id": "f145f335-64cb-4cc9-9ecc-bd2cd4157123",
+      "name": "Create Markdown✅"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "=\n {{ $json.body }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        560,
+        -300
+      ],
+      "id": "c6dded3b-05c7-4565-a5dd-93a27f86b732",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://dev.funautomations.io/webhook/effibotics-technical-seo-analysis",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "website",
+              "value": "={{ $json.website }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        780,
+        -300
+      ],
+      "id": "d0ee4e0a-f9da-4faf-9a60-7ce117cf18a7",
+      "name": "HTTP Request1"
+    }
+  ],
+  "pinData": {
+    "Receive url to scrap": [
+      {
+        "json": {
+          "headers": {
+            "host": "dev.funautomations.io",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+            "content-length": "138",
+            "accept": "*/*",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "accept-language": "en-US,en;q=0.9",
+            "content-type": "application/json",
+            "origin": "https://n8n-manager.preview.softr.app",
+            "priority": "u=1, i",
+            "referer": "https://n8n-manager.preview.softr.app/technical-seo-?autoUser=true&t=1733577566645",
+            "sec-ch-ua": "\"Google Chrome\";v=\"131\", \"Chromium\";v=\"131\", \"Not_A Brand\";v=\"24\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "empty",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-site": "cross-site",
+            "x-forwarded-for": "102.219.208.122",
+            "x-forwarded-host": "dev.funautomations.io",
+            "x-forwarded-proto": "https"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "website": "https://n8n.io",
+            "PAGE_AND_SECTION": "https://n8n-manager.preview.softr.app/technical-seo-?autoUser=true&t=1733577566645#form1"
+          },
+          "webhookUrl": "https://dev.funautomations.io/webhook/d89a2904-3962-485a-a90f-2231e4450d6d",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "errorWorkflow": "UFY8E1UxgEppEMpW"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2024-12-04T12:32:00.284Z",
+      "updatedAt": "2024-12-04T12:32:00.284Z",
+      "id": "bNah9fcKNwQQBzJ1",
+      "name": "SEO DOCTOR"
+    },
+    {
+      "createdAt": "2024-12-07T05:13:55.254Z",
+      "updatedAt": "2024-12-07T05:13:55.254Z",
+      "id": "L5zcJfTllY0jsuUO",
+      "name": "SEO REPORTS"
+    },
+    {
+      "createdAt": "2024-12-03T14:36:18.275Z",
+      "updatedAt": "2024-12-03T14:36:18.275Z",
+      "id": "koKAFcp5uch8EPTB",
+      "name": "Public"
+    }
+  ],
+  "triggerCount": 2,
+  "updatedAt": "2024-12-07T13:20:14.817Z",
+  "versionId": "02970e8c-f345-4a89-8cfa-f33c1b5f4c00"
+}

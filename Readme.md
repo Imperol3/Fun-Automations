@@ -1,6 +1,6 @@
 # Fun Automations
 
-Welcome to **Fun Automations**! 🎉  
+Welcome to **Fun Automations**! 🎉 
 This repository is a collection of my public n8n templates, shared to make automation easier and more accessible. These templates cover a wide range of use cases, helping you automate repetitive tasks, streamline workflows, and improve efficiency.  
 
 ---
@@ -21,7 +21,9 @@ Explore automations for various categories, including:
 - **SEO Automations**  
   - Meta description generation  
   - Keyword research and tracking  
-  - Content performance analysis  
+  - Content performance analysis
+  - Content optimization 
+  
 
 - **Finance and Invoicing**  
   - Generating SEPA invoices  

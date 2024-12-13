@@ -442,7 +442,7 @@
       "typeVersion": 2.1,
       "position": [
         780,
-        80
+        0
       ],
       "id": "42e34942-4635-404d-b3fd-6d87069ebffd",
       "name": "SEND EMAIL REPORT",
@@ -547,7 +547,7 @@
       "typeVersion": 1,
       "position": [
         580,
-        80
+        0
       ],
       "credentials": {
         "openAiApi": {
@@ -1450,6 +1450,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-13T06:09:48.010Z",
-  "versionId": "0078d578-1797-485e-bbd9-a8232c43b357"
+  "updatedAt": "2024-12-13T11:51:37.047Z",
+  "versionId": "9bd1d565-7592-44b9-9b22-cedf031f62a0"
 }

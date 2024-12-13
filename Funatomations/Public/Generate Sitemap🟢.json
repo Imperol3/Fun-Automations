@@ -135,6 +135,21 @@
       "id": "d4fc5983-869c-4d03-bcba-977c244504af",
       "name": "Webhook",
       "webhookId": "4a85c711-e73b-44c9-a146-c4263e0ad9cd"
+    },
+    {
+      "parameters": {
+        "content": "## Usage\n\nRun this on a self hosted n8n instance\n\nCall this webhook endpoint with a `query` as `url` eg \n\n`https://dev.funautomations.io/webhook/4a85c711-d?url=funautomations.io`\n\n- You might need to install each of these axios\ncheerio\n\n- Enable external modules on your n8n by adding these settings to your ENV before you can run this workflow\n\n`NODE_FUNCTION_ALLOW_BUILTIN=*\n NODE_FUNCTION_ALLOW_EXTERNAL=*`\n",
+        "height": 400,
+        "width": 360
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -500,
+        -80
+      ],
+      "typeVersion": 1,
+      "id": "f8e0ced8-bb71-4ce8-9789-3f4235d8f283",
+      "name": "Sticky Note"
     }
   ],
   "pinData": {
@@ -195,6 +210,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-13T06:01:04.554Z",
-  "versionId": "a550dd11-6680-4427-84ef-c145323de7e1"
+  "updatedAt": "2024-12-13T12:52:31.404Z",
+  "versionId": "ed0ca4f5-9f16-4b83-9e94-46b6f79dbb8e"
 }

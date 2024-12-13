@@ -848,7 +848,7 @@
     {
       "parameters": {
         "content": "## We can only get 11 Columns per call. We therefore divide the metris we need and combine tem at the end\n",
-        "height": 440
+        "height": 300
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
@@ -1645,6 +1645,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-13T05:40:57.382Z",
-  "versionId": "4a3205a4-94d4-40c8-9067-cb08ba156560"
+  "updatedAt": "2024-12-13T11:51:56.192Z",
+  "versionId": "00e9d22f-7e3f-4dc9-8390-1f927c2063f8"
 }

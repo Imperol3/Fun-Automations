@@ -1,0 +1,896 @@
+{
+  "active": true,
+  "connections": {
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Sort2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort2": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Report": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields4": {
+      "main": [
+        [
+          {
+            "node": "Summarize by Page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Page Report": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "SEO BRAIN🧠",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Merge Reports🪮",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summarize by Page": {
+      "main": [
+        [
+          {
+            "node": "split by pageLocation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "split by pageLocation": {
+      "main": [
+        [
+          {
+            "node": "Do Sum➕",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate2": {
+      "main": [
+        [
+          {
+            "node": "Merge Reports🪮",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "SEO BRAIN🧠",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SEND EMAIL REPORT": {
+      "ai_tool": [
+        [
+          {
+            "node": "SEO BRAIN🧠",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Report",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Page Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Reports🪮": {
+      "main": [
+        [
+          {
+            "node": "Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Do Sum➕": {
+      "main": [
+        [
+          {
+            "node": "Aggregate2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get_analytics_data": {
+      "ai_tool": [
+        [
+          {
+            "node": "SEO BRAIN🧠",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "SEO BRAIN🧠",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-12-07T10:48:44.395Z",
+  "id": "As0qUqQXGYegkTzg",
+  "meta": null,
+  "name": "Google Analytics Agent🤖 - Create and send Reports🟢",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "423a0873-620b-4695-8f0b-baede3b9c17f",
+              "name": "date",
+              "value": "={{ $json.date.toDateTime().format('yyyy-MM-dd') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2580,
+        80
+      ],
+      "id": "8a032059-30bf-4b2a-96e4-736cace7a6a6",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "date"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        -2420,
+        80
+      ],
+      "id": "1bacfc3a-d329-4a62-be05-37750b3b9015",
+      "name": "Sort2"
+    },
+    {
+      "parameters": {
+        "content": "## Get user Report for the Last 30 Days",
+        "height": 220,
+        "width": 740,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2820,
+        20
+      ],
+      "typeVersion": 1,
+      "id": "34ca834d-5f75-40ad-b8e1-b79a4b6a755a",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "propertyId": {
+          "__rl": true,
+          "value": "468997767",
+          "mode": "list",
+          "cachedResultName": "funautomations.io",
+          "cachedResultUrl": "https://analytics.google.com/analytics/web/#/p468997767/"
+        },
+        "dateRange": "last30days",
+        "metricsGA4": {
+          "metricValues": [
+            {
+              "listName": "eventCount"
+            },
+            {},
+            {
+              "listName": "active1DayUsers"
+            },
+            {
+              "listName": "active28DayUsers"
+            },
+            {
+              "listName": "screenPageViews"
+            },
+            {
+              "listName": "userEngagementDuration"
+            },
+            {
+              "listName": "sessions"
+            }
+          ]
+        },
+        "dimensionsGA4": {
+          "dimensionValues": [
+            {}
+          ]
+        },
+        "returnAll": true,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleAnalytics",
+      "typeVersion": 2,
+      "position": [
+        -2780,
+        80
+      ],
+      "id": "09f9d4c9-875d-462e-aaf7-1019f3a029f9",
+      "name": "Get Report",
+      "credentials": {
+        "googleAnalyticsOAuth2": {
+          "id": "vn2PksmnwxJ1e01s",
+          "name": "Google Analytics account✅"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": []
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2600,
+        320
+      ],
+      "id": "55f51c09-9f4f-484d-a6b7-48d7c5d32566",
+      "name": "Edit Fields4"
+    },
+    {
+      "parameters": {
+        "content": "## Get Page Report for the Last 30 Days",
+        "height": 220,
+        "width": 1260,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2820,
+        280
+      ],
+      "typeVersion": 1,
+      "id": "5729ec35-231a-42f5-be3d-11edf339cbae",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "propertyId": {
+          "__rl": true,
+          "value": "468997767",
+          "mode": "list",
+          "cachedResultName": "funautomations.io",
+          "cachedResultUrl": "https://analytics.google.com/analytics/web/#/p468997767/"
+        },
+        "dateRange": "last30days",
+        "metricsGA4": {
+          "metricValues": [
+            {
+              "listName": "eventCount"
+            },
+            {},
+            {
+              "listName": "screenPageViews"
+            },
+            {
+              "listName": "userEngagementDuration"
+            },
+            {
+              "listName": "sessions"
+            }
+          ]
+        },
+        "dimensionsGA4": {
+          "dimensionValues": [
+            {
+              "listName": "pageLocation"
+            }
+          ]
+        },
+        "returnAll": true,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleAnalytics",
+      "typeVersion": 2,
+      "position": [
+        -2780,
+        320
+      ],
+      "id": "288c557e-9932-4f5c-861a-e69f10e835b9",
+      "name": "Get Page Report",
+      "credentials": {
+        "googleAnalyticsOAuth2": {
+          "id": "vn2PksmnwxJ1e01s",
+          "name": "Google Analytics account✅"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                1
+              ],
+              "triggerAtHour": 9,
+              "triggerAtMinute": 10
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -3840,
+        100
+      ],
+      "id": "0063d04d-a3d2-4f4a-b0f9-c440ac24f079",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "eventCount"
+            },
+            {
+              "fieldToAggregate": "totalUsers"
+            },
+            {
+              "fieldToAggregate": "active1DayUsers"
+            },
+            {
+              "fieldToAggregate": "active28DayUsers"
+            },
+            {
+              "fieldToAggregate": "userEngagementDuration"
+            },
+            {
+              "fieldToAggregate": "sessions"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -2240,
+        80
+      ],
+      "id": "ce1d6db2-f405-4e30-a200-aec6baec1d87",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "concatenate",
+              "field": "eventCount"
+            },
+            {
+              "aggregation": "concatenate",
+              "field": "totalUsers"
+            },
+            {
+              "aggregation": "concatenate",
+              "field": "screenPageViews"
+            },
+            {
+              "aggregation": "concatenate",
+              "field": "userEngagementDuration"
+            },
+            {
+              "aggregation": "concatenate",
+              "field": "sessions"
+            }
+          ]
+        },
+        "fieldsToSplitBy": "pageLocation",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1,
+      "position": [
+        -2400,
+        320
+      ],
+      "id": "1efb7840-f3b3-476d-acca-a4a242e310e7",
+      "name": "Summarize by Page"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "12122cf0-ba7e-4890-9c75-650b52d281d1",
+              "name": "pageLocation",
+              "value": "={{ $json.pageLocation }}",
+              "type": "string"
+            },
+            {
+              "id": "69507c32-3aee-41de-98ab-46ab49806e6e",
+              "name": "date",
+              "value": "={{ $json.concatenated_date.split(\",\") }}",
+              "type": "array"
+            },
+            {
+              "id": "4a7607c5-202b-4c19-b2af-893a85d9c12d",
+              "name": "Total Countries",
+              "value": "={{ $json.concatenated_country.split(\",\") }}",
+              "type": "array"
+            },
+            {
+              "id": "cea431cc-d095-4a87-948f-6c920147370d",
+              "name": "Total Events",
+              "value": "={{ $json.concatenated_eventCount.split(\",\") }}",
+              "type": "array"
+            },
+            {
+              "id": "710c4ae3-bf19-4096-ad4e-53639ac16434",
+              "name": "Total Users",
+              "value": "={{ $json.concatenated_totalUsers.split(\",\") }}",
+              "type": "array"
+            },
+            {
+              "id": "c2c265c0-6398-4b7a-b476-6c3348acdcd7",
+              "name": "active1 DayUsers",
+              "value": "={{ $json.concatenated_active1DayUsers .split(\",\") }}",
+              "type": "array"
+            },
+            {
+              "id": "1897ca4e-2bd7-423a-ba51-49cfcce95e53",
+              "name": "active28DayUsers",
+              "value": "={{ $json.concatenated_active28DayUsers .split(\",\") }}",
+              "type": "array"
+            },
+            {
+              "id": "d2544c3f-fade-40f2-9d5e-8441d5329273",
+              "name": "screenPageViews",
+              "value": "={{ $json.concatenated_screenPageViews .split(\",\") }}",
+              "type": "array"
+            },
+            {
+              "id": "13fc0783-b9ad-4120-aaf7-f5f6afc455e5",
+              "name": "userEngagementDuration",
+              "value": "={{ $json.concatenated_userEngagementDuration .split(\",\") }}",
+              "type": "array"
+            },
+            {
+              "id": "199944f0-794a-487a-9251-7c7a31d9114e",
+              "name": "sessions",
+              "value": "={{ $json.concatenated_sessions .split(\",\") }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2220,
+        320
+      ],
+      "id": "e8677d98-7983-4f67-b4a6-1530c9525ab6",
+      "name": "split by pageLocation"
+    },
+    {
+      "parameters": {
+        "content": "## Get Report and Notify via email",
+        "height": 240,
+        "width": 800,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -3900,
+        380
+      ],
+      "typeVersion": 1,
+      "id": "d0a98335-185c-4eb7-acd0-2e3f0867bbf8",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -1760,
+        320
+      ],
+      "id": "96d6c414-9efc-42c7-a488-32c609ec66d2",
+      "name": "Aggregate2"
+    },
+    {
+      "parameters": {
+        "options": {
+          "baseURL": "https://openrouter.ai/api/v1"
+        }
+      },
+      "id": "adbf88bf-3ead-4db6-9a58-3d8c969382c2",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        -3860,
+        460
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "1JBBIaXSHGKDHZKq",
+          "name": "Openrouter✅"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Send email as a html; when you send the report to the admin\n\n\nPresent this report to the company admins for the performance of the website from the search console.\n\nKey Metrics:\nOverview of Key Metrics:\n\nTotal Events: Number of events triggered by users.\n\nTotal Users: Total count of individual users visiting the site.\n\nActive Users:\n\n1 Day Active Users\n\n28 Day Active Users\n\nUser Engagement Duration: Total time users spent on the site.\n\nSessions: Total number of user sessions.\n\nUser Behavior Analysis:\nEvent Distribution: Graph or chart showing the number of events per day.\n\nSession Duration: Average duration of each session.\n\nEvent-to-User Ratio: Average number of events per user.\n\nBounce Rate: Percentage of single-page sessions.\n\nGeographical Insights:\nTotal Countries: Number of countries from which users visited.\n\nTop Countries: Map or list of the top countries by user activity.\n\nRegional Performance: User engagement and session duration by region.\n\nEngagement Metrics:\nHigh-Engagement Content: Pages with the highest user engagement.\n\nTime on Page: Average time spent on each page.\n\nUser Flow: How users navigate through the site.\n\nConversion Metrics:\nConversion Rate: Percentage of users completing desired actions.\n\nFunnel Analysis: Visualization of user journeys leading to conversions.\n\nTraffic Sources:\nChannels: Breakdown of traffic sources (e.g., organic search, direct, social media).\n\nCampaign Performance: Analysis of marketing campaigns driving traffic and conversions.\n\nDevice and Technology Insights:\nDevice Usage: Distribution of users across desktop, mobile, and tablet.\n\nBrowser and OS Data: Popular browsers and operating systems used by visitors.\n\nUser Retention and Churn:\nRetention Rate: Percentage of returning users.\n\nChurn Analysis: Patterns leading to user drop-off.\n\nRecommendations:\nContent Optimization: Suggestions for improving high and low-performing pages.\n\nUser Retention Strategies: Tactics to increase returning visitors.\n\nMarketing Focus: Recommendations for targeting top-performing regions or channels.\n\nAdditional Details and Context:\nAnalyze high-engagement content, user retention rates, and traffic sources.\n\nProvide actionable recommendations based on the insights.\n\nRefer to previous conversations to include any missed metrics or insights.\n\nData Source:\nThe data is from a subtool node for the different metrics we need.",
+        "options": {
+          "systemMessage": "You are a helpful assistant\n\n<html>\n<head>\n    <style>\n        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }\n        h1, h2, h3 { color: #0073e6; margin-bottom: 10px; }\n        .container { width: 80%; margin: auto; padding: 20px; }\n        .header { background: #f4f4f4; padding: 10px 0; text-align: center; }\n        .footer { text-align: center; margin-top: 20px; font-size: 0.9em; color: #777; }\n        table { width: 100%; border-collapse: collapse; margin: 20px 0; }\n        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }\n        th { background-color: #0073e6; color: #fff; }\n        td { background-color: #f9f9f9; }\n        .highlight { font-weight: bold; color: #d9534f; }\n        .cta-button { background-color: #0073e6; color: white; padding: 10px 20px; border: none; border-radius: 5px; text-decoration: none; }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <div class=\"header\">\n            <h1>Google Analytics Insights & Performance Report</h1>\n        </div>\n\n        <h2>Executive Summary</h2>\n        <p><span class=\"highlight\">Overall Performance:</span> We saw strong performance from direct traffic with high user engagement. Organic sources have potential for growth.</p>\n\n        <h2>Traffic & Source Analysis</h2>\n        <table>\n            <tr>\n                <th>Traffic Source</th>\n                <th>Total Users</th>\n                <th>Engagement (Pages Viewed)</th>\n            </tr>\n            <tr>\n                <td>Direct</td>\n                <td>90</td>\n                <td>7</td>\n            </tr>\n            <tr>\n                <td>Organic</td>\n                <td>31</td>\n                <td>7</td>\n            </tr>\n            <tr>\n                <td>Referral</td>\n                <td>4</td>\n                <td>3</td>\n            </tr>\n            <tr>\n                <td>Paid</td>\n                <td>50</td>\n                <td>5</td>\n            </tr>\n        </table>\n\n        <h2>Key Recommendations</h2>\n        <ul>\n            <li>Improve SEO on high-traffic but underperforming pages.</li>\n            <li>Focus on improving conversion rates from organic traffic sources.</li>\n            <li>Optimize referral traffic by improving content alignment with user needs.</li>\n        </ul>\n\n        <h2>Opportunities for Growth</h2>\n        <ul>\n            <li>Target high-performing segments with personalized content to increase engagement.</li>\n            <li>Focus on organic traffic growth by optimizing landing pages and enhancing content relevance.</li>\n        </ul>\n\n        <div class=\"cta\">\n            <p><a href=\"#\" class=\"cta-button\">Schedule a Discussion</a></p>\n        </div>\n\n        <div class=\"footer\">\n            <p>Thank you for reviewing the insights. For further details, feel free to reach out!</p>\n        </div>\n    </div>\n</body>\n</html>\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -3600,
+        100
+      ],
+      "id": "8caaeff6-ddaa-4c3f-b46e-88090c0f2d11",
+      "name": "SEO BRAIN🧠"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Send email report to the SEO manager",
+        "sendTo": "kimothozacharia5@gmail.com",
+        "subject": "={{ $fromAI(\"subject\") }}",
+        "message": "={{ $fromAI(\"SEO_Report\") }}",
+        "options": {
+          "appendAttribution": false,
+          "senderName": "SEO Team"
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.1,
+      "position": [
+        -3380,
+        460
+      ],
+      "id": "c8b7739e-a5c2-463c-a693-88e04fbc2292",
+      "name": "SEND EMAIL REPORT",
+      "webhookId": "a09cb758-accb-4905-b79c-7a46b98b3f14",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "8PS0qVYNzZvoWNA7",
+          "name": "phoenix✅"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -3060,
+        200
+      ],
+      "id": "5bdfd8bd-bed4-4a78-9eaf-6a558fe969d2",
+      "name": "Execute Workflow Trigger"
+    },
+    {
+      "parameters": {
+        "content": "## Merge and aggregate the data",
+        "height": 200,
+        "width": 480,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2060,
+        40
+      ],
+      "typeVersion": 1,
+      "id": "4ab3a7de-18f7-4ac5-8a96-18a02f53e8d3",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        -2020,
+        100
+      ],
+      "id": "c3da0fff-09e1-4b84-86d1-e3973cd20dfb",
+      "name": "Merge Reports🪮"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "response",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -1800,
+        100
+      ],
+      "id": "035e9ddf-cc0d-4e0a-a2ee-050de7e671e6",
+      "name": "Response"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a61dcd80-509f-4444-a97e-45ba406fbe97",
+              "name": "pageLocation",
+              "value": "={{ $json.pageLocation }}",
+              "type": "string"
+            },
+            {
+              "id": "be2c42da-c33a-43c3-b223-332484112e67",
+              "name": "Days",
+              "value": "={{ $json.date .length}}",
+              "type": "number"
+            },
+            {
+              "id": "b268943c-2616-49f0-b006-330b09e84179",
+              "name": "Total Countries",
+              "value": "={{ $json['Total Countries'].length }}",
+              "type": "number"
+            },
+            {
+              "id": "e8c6a356-95f5-4878-b41d-c30de9d48f59",
+              "name": "Total Events",
+              "value": "={{ $json['Total Events'].map(Number).reduce((sum, currentValue) => sum + currentValue, 0) }}",
+              "type": "number"
+            },
+            {
+              "id": "ec9a3730-f33f-4ce4-8219-d345ad6bef84",
+              "name": "Total Users",
+              "value": "={{ $json['Total Users'].map(Number).reduce((sum, currentValue) => sum + currentValue, 0) }}",
+              "type": "number"
+            },
+            {
+              "id": "ad91b20e-3a0b-4194-ad79-901959fcdc9f",
+              "name": "active28DayUsers",
+              "value": "={{ $json.active28DayUsers .map(Number).reduce((sum, currentValue) => sum + currentValue, 0) }}",
+              "type": "number"
+            },
+            {
+              "id": "b6c6d85f-6a8d-4626-aac2-359c2664016c",
+              "name": "Total screenPageViews",
+              "value": "={{ $json.screenPageViews.map(Number).reduce((sum, currentValue) => sum + currentValue, 0) }}",
+              "type": "number"
+            },
+            {
+              "id": "e17a3320-8e69-426b-99d3-8c8759968105",
+              "name": "Total userEngagement Duration",
+              "value": "={{ $json.userEngagementDuration .map(Number).reduce((sum, currentValue) => sum + currentValue, 0) }}",
+              "type": "number"
+            },
+            {
+              "id": "819e10a8-22f1-42c0-9ca4-1d9e10b1ca6d",
+              "name": "sessions",
+              "value": "={{ $json.sessions.map(Number).reduce((sum, currentValue) => sum + currentValue, 0) }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1980,
+        320
+      ],
+      "id": "90594002-6457-4f56-a96a-8b8edf8c08b4",
+      "name": "Do Sum➕"
+    },
+    {
+      "parameters": {
+        "content": "### Comprehensive Guide for Google Analytics Agent Workflow\n\n![Google Analytics Agent🤖](https://screenrec.com/share/l5VE8RgdZ7 \"Google Analytics Agent🤖\")\n\n\n#### 1. **Understanding the Workflow:**\n- **Schedule Trigger:** This node sets the schedule for the workflow to run. It is configured to trigger weekly at 9:10 AM every Monday.\n- **Inputs:** None required for this node.\n- **Outputs:** Signals the workflow to start at specified intervals.\n\n- **Sticky Note1:** This is a visual note in the n8n interface, used for documentation purposes. It informs users that the workflow's purpose is to get reports and notify via email.\n- **Inputs:** None.\n- **Outputs:** Provides context for the workflow.\n\n- **OpenAI Chat Model:** This node interacts with OpenAI's API to process the data obtained from Google Analytics. It requires an API key to access the OpenAI services.\n- **Inputs:** Base URL for the OpenAI API.\n- **Outputs:** Processed data based on the queries sent to OpenAI.\n\n- **SEO BRAIN🧠:** This node receives processed data and formats it for email reporting.\n- **Inputs:** Text prompt requesting analytics report generation.\n- **Outputs:** Formatted report prepared for sending.\n\n- **SEND EMAIL REPORT:** This node sends the email containing the analytics report to the specified recipient (e.g., SEO manager).\n- **Inputs:** Subject and message content.\n- **Outputs:** An email sent to the designated recipient.\n\n- **Call n8n Workflow Tool:** This node calls another workflow tool for getting Google Analytics data.\n- **Inputs:** Workflow ID to execute.\n- **Outputs:** Executes the specified workflow to retrieve data.\n\n#### 2. **Setup Instructions:**\n- **Prerequisites:**\n- An n8n instance running (locally or hosted).\n- Set up Google Analytics and OpenAI API access.\n- Gmail account with appropriate permissions (OAuth2 credentials).\n\n- **Step-by-Step Configuration:**\n1. Log into your n8n dashboard.\n2. Create a new workflow and import the provided JSON workflow.\n3. Configure the **Schedule Trigger** as per your preferred frequency if necessary.\n4. Set your OpenAI API credentials in the **OpenAI Chat Model** node.\n5. Replace the email address in the **SEND EMAIL REPORT** node with your recipient's email.\n6. Ensure all nodes are connected as indicated in the workflow JSON.\n7. Save the workflow and activate it.\n\n- **Configuration Options:** Users may customize the email recipient and reporting frequency based on their requirements.\n\n#### 3. **Use Case Examples:**\n- **Use Cases:**\n- Weekly reporting of website performance to stakeholders.\n- Providing insights and recommendations based on data in a digestible format.\n\n- **Who Benefits:**\n- Digital marketing professionals.\n- SEO managers.\n- Business analysts who need to review website performance regularly.\n\n- **Practical Value Offered:** This workflow automates the data retrieval and reporting process, saving time and improving data-driven decision-making.\n\n#### 4. **Running and Troubleshooting:**\n- **How to Run:**\n- Ensure the workflow is activated. Monitor it from the n8n dashboard to track execution logs.\n\n- **Troubleshooting Tips:**\n- If emails are not being sent, check the Gmail connection settings for correct OAuth credentials.\n- Ensure the correct API keys are set for OpenAI and that your account has the necessary permissions.\n- If the workflow does not execute, confirm that the triggering schedule is set as expected.\n\n### Conclusion\nThis guide provides a detailed overview, setup instructions, use cases, and troubleshooting steps for the Google Analytics Agent workflow in n8n. By following the instructions, users can efficiently manage their website performance reporting.\n\n\n\n",
+        "height": 580,
+        "width": 480
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -4580,
+        20
+      ],
+      "typeVersion": 1,
+      "id": "f5418845-92bd-4f26-8b67-e9c71bb9221c",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "name": "Get_analytics_data",
+        "description": "call this tool to get the google analytics data for processing",
+        "workflowId": {
+          "__rl": true,
+          "value": "={{ $workflow.id }}",
+          "mode": "id"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        -3560,
+        460
+      ],
+      "id": "2f40219f-7310-44fe-af6c-8c02fb8adca5",
+      "name": "Get_analytics_data"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        -3220,
+        460
+      ],
+      "id": "8b045789-5996-468f-a0f5-e3fe2c613d5c",
+      "name": "Calculator"
+    }
+  ],
+  "pinData": {
+    "Execute Workflow Trigger": [
+      {
+        "json": {
+          "query": "Generate Search Console Performance Report for website, including: Total Events, Total Users, Active Users (1 Day, 28 Day), User Engagement Duration, Sessions, Event Distribution, Session Duration, Event-to-User Ratio, Bounce Rate, Total Countries, Top Countries, Regional Performance, High-Engagement Content, Time on Page, User Flow, Conversion Rate, Funnel Analysis, Traffic Sources (Channels, Campaign Performance), Device Usage, Browser and OS Data, Retention Rate, Churn Analysis, Recommendations for Content Optimization, User Retention Strategies, Marketing Focus, and any Additional Insights."
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "errorWorkflow": "UFY8E1UxgEppEMpW"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2024-12-04T12:32:00.284Z",
+      "updatedAt": "2024-12-04T12:32:00.284Z",
+      "id": "bNah9fcKNwQQBzJ1",
+      "name": "SEO DOCTOR"
+    },
+    {
+      "createdAt": "2024-12-07T05:13:55.254Z",
+      "updatedAt": "2024-12-07T05:13:55.254Z",
+      "id": "L5zcJfTllY0jsuUO",
+      "name": "SEO REPORTS"
+    },
+    {
+      "createdAt": "2024-12-03T14:40:24.017Z",
+      "updatedAt": "2024-12-03T14:40:24.017Z",
+      "id": "ufRhFqhr9vLO0YC1",
+      "name": "AI"
+    },
+    {
+      "createdAt": "2024-12-03T14:36:18.275Z",
+      "updatedAt": "2024-12-03T14:36:18.275Z",
+      "id": "koKAFcp5uch8EPTB",
+      "name": "Public"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-12-13T06:12:27.706Z",
+  "versionId": "2b93aca8-0ac5-4ec7-8fd2-18aa78f9f8e3"
+}

@@ -877,7 +877,8 @@
     ]
   },
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "errorWorkflow": "UFY8E1UxgEppEMpW"
   },
   "staticData": null,
   "tags": [
@@ -901,6 +902,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2024-12-13T06:09:26.651Z",
-  "versionId": "cd94461b-3404-489b-9355-a539de8d1054"
+  "updatedAt": "2024-12-13T21:00:04.560Z",
+  "versionId": "26446a63-d34e-4802-b857-e32aad91ee89"
 }

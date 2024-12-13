@@ -578,12 +578,12 @@
       "parameters": {
         "content": "## Get Report and Notify via email",
         "height": 240,
-        "width": 800,
+        "width": 660,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -3900,
+        -3760,
         380
       ],
       "typeVersion": 1,
@@ -615,7 +615,7 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1,
       "position": [
-        -3860,
+        -3700,
         460
       ],
       "credentials": {
@@ -802,14 +802,14 @@
     },
     {
       "parameters": {
-        "content": "### Comprehensive Guide for Google Analytics Agent Workflow\n\n![Google Analytics Agent🤖](https://screenrec.com/share/l5VE8RgdZ7 \"Google Analytics Agent🤖\")\n\n\n#### 1. **Understanding the Workflow:**\n- **Schedule Trigger:** This node sets the schedule for the workflow to run. It is configured to trigger weekly at 9:10 AM every Monday.\n- **Inputs:** None required for this node.\n- **Outputs:** Signals the workflow to start at specified intervals.\n\n- **Sticky Note1:** This is a visual note in the n8n interface, used for documentation purposes. It informs users that the workflow's purpose is to get reports and notify via email.\n- **Inputs:** None.\n- **Outputs:** Provides context for the workflow.\n\n- **OpenAI Chat Model:** This node interacts with OpenAI's API to process the data obtained from Google Analytics. It requires an API key to access the OpenAI services.\n- **Inputs:** Base URL for the OpenAI API.\n- **Outputs:** Processed data based on the queries sent to OpenAI.\n\n- **SEO BRAIN🧠:** This node receives processed data and formats it for email reporting.\n- **Inputs:** Text prompt requesting analytics report generation.\n- **Outputs:** Formatted report prepared for sending.\n\n- **SEND EMAIL REPORT:** This node sends the email containing the analytics report to the specified recipient (e.g., SEO manager).\n- **Inputs:** Subject and message content.\n- **Outputs:** An email sent to the designated recipient.\n\n- **Call n8n Workflow Tool:** This node calls another workflow tool for getting Google Analytics data.\n- **Inputs:** Workflow ID to execute.\n- **Outputs:** Executes the specified workflow to retrieve data.\n\n#### 2. **Setup Instructions:**\n- **Prerequisites:**\n- An n8n instance running (locally or hosted).\n- Set up Google Analytics and OpenAI API access.\n- Gmail account with appropriate permissions (OAuth2 credentials).\n\n- **Step-by-Step Configuration:**\n1. Log into your n8n dashboard.\n2. Create a new workflow and import the provided JSON workflow.\n3. Configure the **Schedule Trigger** as per your preferred frequency if necessary.\n4. Set your OpenAI API credentials in the **OpenAI Chat Model** node.\n5. Replace the email address in the **SEND EMAIL REPORT** node with your recipient's email.\n6. Ensure all nodes are connected as indicated in the workflow JSON.\n7. Save the workflow and activate it.\n\n- **Configuration Options:** Users may customize the email recipient and reporting frequency based on their requirements.\n\n#### 3. **Use Case Examples:**\n- **Use Cases:**\n- Weekly reporting of website performance to stakeholders.\n- Providing insights and recommendations based on data in a digestible format.\n\n- **Who Benefits:**\n- Digital marketing professionals.\n- SEO managers.\n- Business analysts who need to review website performance regularly.\n\n- **Practical Value Offered:** This workflow automates the data retrieval and reporting process, saving time and improving data-driven decision-making.\n\n#### 4. **Running and Troubleshooting:**\n- **How to Run:**\n- Ensure the workflow is activated. Monitor it from the n8n dashboard to track execution logs.\n\n- **Troubleshooting Tips:**\n- If emails are not being sent, check the Gmail connection settings for correct OAuth credentials.\n- Ensure the correct API keys are set for OpenAI and that your account has the necessary permissions.\n- If the workflow does not execute, confirm that the triggering schedule is set as expected.\n\n### Conclusion\nThis guide provides a detailed overview, setup instructions, use cases, and troubleshooting steps for the Google Analytics Agent workflow in n8n. By following the instructions, users can efficiently manage their website performance reporting.\n\n\n\n",
-        "height": 580,
-        "width": 480
+        "content": "### Comprehensive Guide for Google Analytics Agent Workflow\n\n#### 2. **Setup Instructions:**\n- **Prerequisites:**\n- An n8n instance running (locally or hosted).\n- Set up Google Analytics and OpenAI API access.\n- Gmail account with appropriate permissions (OAuth2 credentials).\n\n- **Step-by-Step Configuration:**\n1. Log into your n8n dashboard.\n2. Create a new workflow and import the provided JSON workflow.\n3. Configure the **Schedule Trigger** as per your preferred frequency if necessary.\n4. Set your OpenAI API credentials in the **OpenAI Chat Model** node.\n5. Replace the email address in the **SEND EMAIL REPORT** node with your recipient's email.\n6. Ensure all nodes are connected as indicated in the workflow JSON.\n7. Save the workflow and activate it.\n\n- **Configuration Options:** Users may customize the email recipient and reporting frequency based on their requirements.\n\n#### 3. **Use Case Examples:**\n- **Use Cases:**\n- Weekly reporting of website performance to stakeholders.\n- Providing insights and recommendations based on data in a digestible format.\n\n- **Who Benefits:**\n- Digital marketing professionals.\n- SEO managers.\n- Business analysts who need to review website performance regularly.\n\n- **Practical Value Offered:** This workflow automates the data retrieval and reporting process, saving time and improving data-driven decision-making.\n\n#### 4. **Running and Troubleshooting:**\n- **How to Run:**\n- Ensure the workflow is activated. Monitor it from the n8n dashboard to track execution logs.\n\n- **Troubleshooting Tips:**\n- If emails are not being sent, check the Gmail connection settings for correct OAuth credentials.\n- Ensure the correct API keys are set for OpenAI and that your account has the necessary permissions.\n- If the workflow does not execute, confirm that the triggering schedule is set as expected.\n\n### Conclusion\nThis guide provides a detailed overview, setup instructions, use cases, and troubleshooting steps for the Google Analytics Agent workflow in n8n. By following the instructions, users can efficiently manage their website performance reporting.\n\n\n\n",
+        "height": 540,
+        "width": 420
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -4580,
-        20
+        -4760,
+        60
       ],
       "typeVersion": 1,
       "id": "f5418845-92bd-4f26-8b67-e9c71bb9221c",
@@ -828,7 +828,7 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 1.3,
       "position": [
-        -3560,
+        -3540,
         460
       ],
       "id": "2f40219f-7310-44fe-af6c-8c02fb8adca5",
@@ -844,6 +844,22 @@
       ],
       "id": "8b045789-5996-468f-a0f5-e3fe2c613d5c",
       "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "content": "## Changes\n\n1. Set credentials and Change the property in the Google analytics Node and the date range\n2. Update the credentials on the Gmail node \n3. Test the setup \n\n",
+        "height": 260,
+        "width": 340,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -4260,
+        40
+      ],
+      "typeVersion": 1,
+      "id": "e6b89d77-cd89-467f-b0d5-27c92fce0b06",
+      "name": "Sticky Note5"
     }
   ],
   "pinData": {
@@ -891,6 +907,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-13T06:12:27.706Z",
-  "versionId": "2b93aca8-0ac5-4ec7-8fd2-18aa78f9f8e3"
+  "updatedAt": "2024-12-13T11:42:28.824Z",
+  "versionId": "436f603b-ff87-417b-bcaa-0b80e8593c8f"
 }

@@ -1,0 +1,923 @@
+{
+  "active": false,
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "SEO BRAIN🧠",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get_analytics_data": {
+      "ai_tool": [
+        [
+          {
+            "node": "SEO BRAIN🧠",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Postgres Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "SEO BRAIN🧠",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "SEO BRAIN🧠",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "SEO BRAIN🧠",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Metrics and dimensions": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Sort by Date 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Users by day": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Sort by date",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get custom user Report": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Aggregate Page reports",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Page Report1📶📶": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Page Report 2📶": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort by date": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort by Date 2": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Users by day",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get custom user Report",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Page Report1📶📶",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Page Report 2📶",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-12-12T08:46:06.881Z",
+  "id": "okXLG8idJpSsaYlC",
+  "meta": null,
+  "name": "Google Analytics Agent🤖 - Chat with data🟢",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Get Report and Notify via email",
+        "height": 200,
+        "width": 680,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -3540,
+        360
+      ],
+      "typeVersion": 1,
+      "id": "aaffb576-c679-4fc1-b010-7274496cef24",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "options": {
+          "baseURL": "https://openrouter.ai/api/v1"
+        }
+      },
+      "id": "5659a65c-4094-4247-a3bc-eb98ba3bc2a2",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        -3500,
+        440
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "1JBBIaXSHGKDHZKq",
+          "name": "Openrouter✅"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}\n\n\nThe default limit to be used should be 1000\n\n# Dynamic Google Analytics Query Generation\n\n## Prompt Engineering Strategy\n\n### Core Instruction Template\n```\nYou are a Google Analytics 4 query constructor. Given a natural language question about analytics data, \nyou must:\n1. Identify the most appropriate dimensions\n2. Select the most relevant metrics\n3. Determine the correct date range\n4. Generate a valid JSON payload for the GA4 API\n\nRules:\n- Always use Google Analytics 4 (GA4) naming conventions\n- Prefer aggregated metrics when possible\n- Map natural language to precise GA dimensions/metrics\n\n### Dimension Mapping\n- \"Users\" → \"totalUsers\"\n- \"Sessions\" → \"sessions\"\n- \"Page Views\" → \"pageViews\"\n- \"Conversion\" → \"conversions\"\n- \"Revenue\" → \"totalRevenue\"\n\n### Date Range Strategies\n- \"Last month\" → startDate: \"firstDayOfLastMonth\", endDate: \"lastDayOfLastMonth\"\n- \"This month\" → startDate: \"firstDayOfMonth\", endDate: \"today\"\n- \"Last 7 days\" → startDate: \"7daysAgo\", endDate: \"today\"\n- \"Last 30 days\" → startDate: \"30daysAgo\", endDate: \"today\"\n```\n\n### Few-Shot Example Queries\n\n#### Example 1: User Count\n**User Question**: How many users did we have last month?\n**Generated Query**:\n```json\n{\n  \"dateRanges\": [{\n    \"startDate\": \"firstDayOfLastMonth\",\n    \"endDate\": \"lastDayOfLastMonth\"\n  }],\n  \"dimensions\": [],\n  \"metrics\": [{\"name\": \"totalUsers\"}]\n}\n```\n\n#### Example 2: User Acquisition\n**User Question**: How many new users came to our website last month by traffic source?\n**Generated Query**:\n```json\n{\n  \"dateRanges\": [{\n    \"startDate\": \"firstDayOfLastMonth\",\n    \"endDate\": \"lastDayOfLastMonth\"\n  }],\n  \"dimensions\": [{\"name\": \"firstUserSource\"}],\n  \"metrics\": [\n    {\"name\": \"newUsers\"},\n    {\"name\": \"sessions\"}\n  ]\n}\n```\n\n#### Example 3: Conversion Analysis\n**User Question**: What was our conversion rate for product purchases last quarter?\n**Generated Query**:\n```json\n{\n  \"dateRanges\": [{\n    \"startDate\": \"firstDayOfLastQuarter\",\n    \"endDate\": \"lastDayOfLastQuarter\"\n  }],\n  \"dimensions\": [],\n  \"metrics\": [\n    {\"name\": \"totalUsers\"},\n    {\"name\": \"conversions\"},\n    {\"name\": \"conversionRate\"}\n  ]\n}\n```\n\n## Implementation Recommendations\n1. Use a robust few-shot learning approach\n2. Provide clear context about GA4 metrics\n3. Include error handling for ambiguous queries\n4. Allow manual override/refinement\n\n### Potential Challenges\n- Handling very specific or niche metric requests\n- Disambiguating similar metric concepts\n- Managing complex multi-dimensional queries\n```\n\n### Potential Prompt Framework\n\n```\nContext: You are a Google Analytics 4 query generator. \nMapping Rules:\n- Always generate a valid GA4 API JSON payload\n- Map natural language precisely to GA metrics\n- Handle date ranges flexibly\n- Prioritize most relevant dimensions/metrics\n\nExamples:\n1. \"Last month's users\" → \n   {dateRanges:[{startDate:\"firstDayOfLastMonth\", endDate:\"lastDayOfLastMonth\"}], \n    metrics:[{name:\"totalUsers\"}]}\n\n2. \"New users by traffic source this month\" → \n   {dateRanges:[{startDate:\"firstDayOfMonth\", endDate:\"today\"}], \n    dimensions:[{name:\"firstUserSource\"}], \n    metrics:[{name:\"newUsers\"}, {name:\"sessions\"}]}\n\nUser Question: {{ $json.chatInput }}\n\n\nOutput the precise GA4 API JSON payload.\n```\n\n## Testing Recommendations\n1. Validate each generated query against GA4 API specs\n2. Implement fallback for unrecognized queries\n3. Allow manual adjustment of auto-generated queries",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -3280,
+        180
+      ],
+      "id": "253adefb-5cfc-4103-be4a-14949658ab59",
+      "name": "SEO BRAIN🧠",
+      "retryOnFail": true
+    },
+    {
+      "parameters": {
+        "content": "### Comprehensive Guide for Google Analytics Agent Workflow\n\n![Google Analytics Agent🤖](https://screenrec.com/share/l5VE8RgdZ7 \"Google Analytics Agent🤖\")\n\n\n#### 1. **Understanding the Workflow:**\n- **Schedule Trigger:** This node sets the schedule for the workflow to run. It is configured to trigger weekly at 9:10 AM every Monday.\n- **Inputs:** None required for this node.\n- **Outputs:** Signals the workflow to start at specified intervals.\n\n- **Sticky Note1:** This is a visual note in the n8n interface, used for documentation purposes. It informs users that the workflow's purpose is to get reports and notify via email.\n- **Inputs:** None.\n- **Outputs:** Provides context for the workflow.\n\n- **OpenAI Chat Model:** This node interacts with OpenAI's API to process the data obtained from Google Analytics. It requires an API key to access the OpenAI services.\n- **Inputs:** Base URL for the OpenAI API.\n- **Outputs:** Processed data based on the queries sent to OpenAI.\n\n- **SEO BRAIN🧠:** This node receives processed data and formats it for email reporting.\n- **Inputs:** Text prompt requesting analytics report generation.\n- **Outputs:** Formatted report prepared for sending.\n\n- **SEND EMAIL REPORT:** This node sends the email containing the analytics report to the specified recipient (e.g., SEO manager).\n- **Inputs:** Subject and message content.\n- **Outputs:** An email sent to the designated recipient.\n\n- **Call n8n Workflow Tool:** This node calls another workflow tool for getting Google Analytics data.\n- **Inputs:** Workflow ID to execute.\n- **Outputs:** Executes the specified workflow to retrieve data.\n\n#### 2. **Setup Instructions:**\n- **Prerequisites:**\n- An n8n instance running (locally or hosted).\n- Set up Google Analytics and OpenAI API access.\n- Gmail account with appropriate permissions (OAuth2 credentials).\n\n- **Step-by-Step Configuration:**\n1. Log into your n8n dashboard.\n2. Create a new workflow and import the provided JSON workflow.\n3. Configure the **Schedule Trigger** as per your preferred frequency if necessary.\n4. Set your OpenAI API credentials in the **OpenAI Chat Model** node.\n5. Replace the email address in the **SEND EMAIL REPORT** node with your recipient's email.\n6. Ensure all nodes are connected as indicated in the workflow JSON.\n7. Save the workflow and activate it.\n\n- **Configuration Options:** Users may customize the email recipient and reporting frequency based on their requirements.\n\n#### 3. **Use Case Examples:**\n- **Use Cases:**\n- Weekly reporting of website performance to stakeholders.\n- Providing insights and recommendations based on data in a digestible format.\n\n- **Who Benefits:**\n- Digital marketing professionals.\n- SEO managers.\n- Business analysts who need to review website performance regularly.\n\n- **Practical Value Offered:** This workflow automates the data retrieval and reporting process, saving time and improving data-driven decision-making.\n\n#### 4. **Running and Troubleshooting:**\n- **How to Run:**\n- Ensure the workflow is activated. Monitor it from the n8n dashboard to track execution logs.\n\n- **Troubleshooting Tips:**\n- If emails are not being sent, check the Gmail connection settings for correct OAuth credentials.\n- Ensure the correct API keys are set for OpenAI and that your account has the necessary permissions.\n- If the workflow does not execute, confirm that the triggering schedule is set as expected.\n\n### Conclusion\nThis guide provides a detailed overview, setup instructions, use cases, and troubleshooting steps for the Google Analytics Agent workflow in n8n. By following the instructions, users can efficiently manage their website performance reporting.\n\n\n\n",
+        "height": 580,
+        "width": 480
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -4580,
+        20
+      ],
+      "typeVersion": 1,
+      "id": "c133b83a-f2c2-43f5-8064-b67bc4080915",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "name": "Get_analytics_data",
+        "description": "call this tool to get the google analytics data for processing",
+        "workflowId": {
+          "__rl": true,
+          "value": "={{ $workflow.id }}",
+          "mode": "id"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        -3000,
+        440
+      ],
+      "id": "706d842d-7c0a-4b56-9b93-038caa85756b",
+      "name": "Get_analytics_data"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [
+        -3340,
+        440
+      ],
+      "id": "5ae1e350-dfbd-491a-9113-d3551e5364d8",
+      "name": "Postgres Chat Memory",
+      "credentials": {
+        "postgres": {
+          "id": "siSTyY11k5Ld2JM9",
+          "name": "supabase n8n cloud✅"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        -3160,
+        440
+      ],
+      "id": "f7ca914f-bdc0-493c-9919-ce1284eaffa6",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -3600,
+        180
+      ],
+      "id": "e7f37a0e-7040-49c1-bbcb-3a47613bbf46",
+      "name": "When chat message received",
+      "webhookId": "831eec68-6a8a-4806-bfe6-de24cad5ce21"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Call this tool to get the actual metrics and dimensions as they are used in Google analytics documentations. Make sure you use this tool to create your API",
+        "url": "https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        -3300,
+        700
+      ],
+      "id": "b06fd001-7955-4c0e-9426-a5fd5a1b20a9",
+      "name": "Get Metrics and dimensions"
+    },
+    {
+      "parameters": {
+        "content": "## Page reports",
+        "height": 380,
+        "width": 660,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2300,
+        420
+      ],
+      "typeVersion": 1,
+      "id": "714b378f-122a-4fd1-96c4-eeee4177544c",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "423a0873-620b-4695-8f0b-baede3b9c17f",
+              "name": "date",
+              "value": "={{ $json.date.toDateTime().format('yyyy-MM-dd') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2060,
+        220
+      ],
+      "id": "56a41632-50ce-4edd-bee6-a401a32ab578",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "propertyId": {
+          "__rl": true,
+          "value": "399795563",
+          "mode": "list",
+          "cachedResultName": "www.mailsafi.com - GA4",
+          "cachedResultUrl": "https://analytics.google.com/analytics/web/#/p399795563/"
+        },
+        "dateRange": "last30days",
+        "metricsGA4": {
+          "metricValues": [
+            {
+              "listName": "other"
+            },
+            {
+              "listName": "other",
+              "name": "scrolledUsers"
+            },
+            {
+              "listName": "other",
+              "name": "userKeyEventRate"
+            },
+            {
+              "listName": "other",
+              "name": "newUsers"
+            },
+            {
+              "listName": "other",
+              "name": "totalPurchasers"
+            },
+            {
+              "listName": "other",
+              "name": "active1DayUsers"
+            },
+            {
+              "listName": "other",
+              "name": "active7DayUsers"
+            },
+            {
+              "listName": "other",
+              "name": "active28DayUsers"
+            },
+            {
+              "listName": "other",
+              "name": "firstTimePurchasers"
+            }
+          ]
+        },
+        "dimensionsGA4": {
+          "dimensionValues": [
+            {}
+          ]
+        },
+        "returnAll": true,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleAnalytics",
+      "typeVersion": 2,
+      "position": [
+        -2240,
+        20
+      ],
+      "id": "3852f662-863a-4d87-a06c-be382079d0a4",
+      "name": "Users by day",
+      "credentials": {
+        "googleAnalyticsOAuth2": {
+          "id": "vn2PksmnwxJ1e01s",
+          "name": "Google Analytics account✅"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "423a0873-620b-4695-8f0b-baede3b9c17f",
+              "name": "date",
+              "value": "={{ $json.date.toDateTime().format('yyyy-MM-dd') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2060,
+        20
+      ],
+      "id": "852c4de0-6aaa-4141-9266-faa3dd259bc7",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "propertyId": {
+          "__rl": true,
+          "value": "399795563",
+          "mode": "list",
+          "cachedResultName": "www.mailsafi.com - GA4",
+          "cachedResultUrl": "https://analytics.google.com/analytics/web/#/p399795563/"
+        },
+        "dateRange": "last30days",
+        "metricsGA4": {
+          "metricValues": [
+            {
+              "listName": "other",
+              "name": "dauPerMau"
+            },
+            {
+              "listName": "other",
+              "name": "dauPerWau"
+            },
+            {
+              "listName": "other"
+            }
+          ]
+        },
+        "dimensionsGA4": {
+          "dimensionValues": [
+            {
+              "listName": "other"
+            }
+          ]
+        },
+        "returnAll": true,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleAnalytics",
+      "typeVersion": 2,
+      "position": [
+        -2240,
+        220
+      ],
+      "id": "af392dfe-7eca-4ed4-8658-7b1509d71dac",
+      "name": "Get custom user Report",
+      "credentials": {
+        "googleAnalyticsOAuth2": {
+          "id": "vn2PksmnwxJ1e01s",
+          "name": "Google Analytics account✅"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "pageLocation",
+        "joinMode": "enrichInput1",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        -2020,
+        540
+      ],
+      "id": "3b433056-10e5-4a77-ac58-fa28db1b0597",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "propertyId": {
+          "__rl": true,
+          "value": "399795563",
+          "mode": "list",
+          "cachedResultName": "www.mailsafi.com - GA4",
+          "cachedResultUrl": "https://analytics.google.com/analytics/web/#/p399795563/"
+        },
+        "dateRange": "last30days",
+        "metricsGA4": {
+          "metricValues": [
+            {
+              "listName": "eventCount"
+            },
+            {},
+            {
+              "listName": "screenPageViews"
+            },
+            {
+              "listName": "userEngagementDuration"
+            },
+            {
+              "listName": "sessions"
+            },
+            {
+              "listName": "checkouts"
+            },
+            {
+              "listName": "sessionsPerUser"
+            },
+            {
+              "listName": "other",
+              "name": "screenPageViewsPerUser"
+            },
+            {
+              "listName": "other",
+              "name": "screenPageViewsPerSession"
+            },
+            {
+              "listName": "other",
+              "name": "engagementRate"
+            }
+          ]
+        },
+        "dimensionsGA4": {
+          "dimensionValues": [
+            {
+              "listName": "pageLocation"
+            }
+          ]
+        },
+        "returnAll": true,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleAnalytics",
+      "typeVersion": 2,
+      "position": [
+        -2220,
+        460
+      ],
+      "id": "087ae6cd-e710-4072-a1bb-5aff2c9412fb",
+      "name": "Get Page Report1📶📶",
+      "credentials": {
+        "googleAnalyticsOAuth2": {
+          "id": "vn2PksmnwxJ1e01s",
+          "name": "Google Analytics account✅"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "propertyId": {
+          "__rl": true,
+          "value": "399795563",
+          "mode": "list",
+          "cachedResultName": "www.mailsafi.com - GA4",
+          "cachedResultUrl": "https://analytics.google.com/analytics/web/#/p399795563/"
+        },
+        "dateRange": "last30days",
+        "metricsGA4": {
+          "metricValues": [
+            {
+              "listName": "other",
+              "name": "activeUsers"
+            },
+            {
+              "listName": "other",
+              "name": "bounceRate"
+            },
+            {
+              "listName": "other",
+              "name": "keyEvents:free_trial"
+            },
+            {
+              "listName": "other",
+              "name": "keyEvents:get_quote"
+            },
+            {
+              "listName": "other",
+              "name": "userKeyEventRate:ua_sign_up"
+            },
+            {
+              "listName": "other"
+            }
+          ]
+        },
+        "dimensionsGA4": {
+          "dimensionValues": [
+            {
+              "listName": "pageLocation"
+            }
+          ]
+        },
+        "returnAll": true,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleAnalytics",
+      "typeVersion": 2,
+      "position": [
+        -2220,
+        640
+      ],
+      "id": "a8c04a3f-39ec-4a16-b349-720cfecb6aa5",
+      "name": "Get Page Report 2📶",
+      "credentials": {
+        "googleAnalyticsOAuth2": {
+          "id": "vn2PksmnwxJ1e01s",
+          "name": "Google Analytics account✅"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "date",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        -1680,
+        120
+      ],
+      "id": "557245b3-20a6-43d3-8bda-951d4ae626e1",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "date"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        -1900,
+        20
+      ],
+      "id": "cb2a5f52-bfaa-4bd6-9307-25e6537a04d4",
+      "name": "Sort by date"
+    },
+    {
+      "parameters": {
+        "sortFieldsUi": {
+          "sortField": [
+            {
+              "fieldName": "date"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        -1880,
+        220
+      ],
+      "id": "06686b4a-1d82-4116-b382-fb5ffd0f872e",
+      "name": "Sort by Date 2"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "response",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -1840,
+        540
+      ],
+      "id": "2858825b-b8a6-4939-8567-5bdcac157fce",
+      "name": "Aggregate Page reports"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2760,
+        380
+      ],
+      "id": "0cc1ca9c-9263-4227-be80-0f74a253f21f",
+      "name": "Execute Workflow Trigger"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.query }}",
+                    "rightValue": "user",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "users"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": false,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "2bfc1e36-8591-46ec-838e-fecd97f70ac9",
+                    "leftValue": "={{ $json.query }}",
+                    "rightValue": "page",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "page"
+            }
+          ]
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -2560,
+        380
+      ],
+      "id": "0ef3cf3a-66b3-4cab-b622-81f9acd743c4",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "response",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -1520,
+        120
+      ],
+      "id": "af44ef01-df66-4299-b9f6-f9f10b1046a9",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "content": "## User reports",
+        "height": 400,
+        "width": 980,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2300,
+        -20
+      ],
+      "typeVersion": 1,
+      "id": "62c8708c-3dd3-470c-8ba0-253b33c332cf",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {
+    "Execute Workflow Trigger": [
+      {
+        "json": {
+          "query": "{\"dateRanges\":[{\"startDate\":\"firstDayOfLastMonth\",\"endDate\":\"lastDayOfLastMonth\"}],\"metrics\":[{\"name\":\"totalUsers\"}]}"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "errorWorkflow": "UFY8E1UxgEppEMpW"
+  },
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2024-12-03T14:40:24.017Z",
+      "updatedAt": "2024-12-03T14:40:24.017Z",
+      "id": "ufRhFqhr9vLO0YC1",
+      "name": "AI"
+    },
+    {
+      "createdAt": "2024-12-04T12:32:00.284Z",
+      "updatedAt": "2024-12-04T12:32:00.284Z",
+      "id": "bNah9fcKNwQQBzJ1",
+      "name": "SEO DOCTOR"
+    },
+    {
+      "createdAt": "2024-12-07T05:13:55.254Z",
+      "updatedAt": "2024-12-07T05:13:55.254Z",
+      "id": "L5zcJfTllY0jsuUO",
+      "name": "SEO REPORTS"
+    },
+    {
+      "createdAt": "2024-12-03T14:36:18.275Z",
+      "updatedAt": "2024-12-03T14:36:18.275Z",
+      "id": "koKAFcp5uch8EPTB",
+      "name": "Public"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-12-13T11:45:58.501Z",
+  "versionId": "e5528ebe-1440-46f0-bfcb-858abc4c7998"
+}

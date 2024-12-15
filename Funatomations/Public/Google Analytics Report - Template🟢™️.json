@@ -847,13 +847,14 @@
     },
     {
       "parameters": {
-        "content": "## We can only get 11 Columns per call. We therefore divide the metris we need and combine tem at the end\n",
-        "height": 300
+        "content": "## We can only get 11 Columns per call. We therefore divide the metrics we need and combine them at the end\n\nFor a detailed installation Guide Visit this [notion page](https://funautomation.notion.site/Google-Analytics-Report-Template-15dd3b4768e280af8e7fc1681573f30d?pvs=4)\n\nFor more Inquiries\nInfo@effibotics.com\n",
+        "height": 300,
+        "width": 500
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        -1040,
-        -880
+        -1160,
+        -840
       ],
       "typeVersion": 1,
       "id": "d4533af6-ee09-4109-91eb-c756e8f13ac4",
@@ -1645,6 +1646,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-13T11:51:56.192Z",
-  "versionId": "00e9d22f-7e3f-4dc9-8390-1f927c2063f8"
+  "updatedAt": "2024-12-15T09:39:00.902Z",
+  "versionId": "29804284-baee-4632-a0ba-fcb26f366225"
 }

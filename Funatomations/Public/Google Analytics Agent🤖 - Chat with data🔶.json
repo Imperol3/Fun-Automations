@@ -219,7 +219,7 @@
   "pinData": {},
   "settings": {
     "executionOrder": "v1",
-    "errorWorkflow": "UFY8E1UxgEppEMpW"
+    "errorWorkflow": "2gLR5bciIZCpJZRE"
   },
   "staticData": {
     "node:Schedule Trigger": {
@@ -253,6 +253,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-15T10:57:17.345Z",
-  "versionId": "a0195540-18bc-4a7d-86f7-264b122e8b11"
+  "updatedAt": "2024-12-20T05:12:16.067Z",
+  "versionId": "d491ecc0-ba4b-4b8f-8310-3d262eda15fd"
 }

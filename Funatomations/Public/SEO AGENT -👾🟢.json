@@ -364,7 +364,7 @@
   "pinData": {},
   "settings": {
     "executionOrder": "v1",
-    "errorWorkflow": "UFY8E1UxgEppEMpW"
+    "errorWorkflow": "2gLR5bciIZCpJZRE"
   },
   "staticData": {
     "node:Schedule Trigger": {
@@ -398,6 +398,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-16T10:00:10.812Z",
-  "versionId": "05f3dd9f-c33b-43eb-b51c-d96aa962a074"
+  "updatedAt": "2024-12-20T05:12:16.185Z",
+  "versionId": "2111b5b6-05fe-4f70-b197-42729e08a76a"
 }

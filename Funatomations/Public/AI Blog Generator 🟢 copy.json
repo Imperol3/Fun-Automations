@@ -1,0 +1,1166 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [],
+        []
+      ]
+    },
+    "Set strategy globals": {
+      "main": [
+        [
+          {
+            "node": "Web Researcher",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SERP_search": {
+      "ai_tool": [
+        [
+          {
+            "node": "Web Researcher",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Web Researcher",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Page scrapper": {
+      "ai_tool": [
+        [
+          {
+            "node": "Web Researcher",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Draft Writer": {
+      "main": [
+        [
+          {
+            "node": "Senior Writer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Senior Editor - Reviewer": {
+      "main": [
+        [
+          {
+            "node": "John the Human",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model8": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "John the Human",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Senior Editor - Reviewer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral Cloud Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Draft Writer",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Senior Writer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Senior Writer": {
+      "main": [
+        [
+          {
+            "node": "Senior Editor - Reviewer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "John the Human": {
+      "main": [
+        [
+          {
+            "node": "Extract title",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract title": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mistral Cloud Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Web Researcher",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Set strategy globals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET WEBSITE CONTENT": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "GET WEBSITE CONTENT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Mistral Cloud": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-07T15:03:41.807Z",
+  "id": "crFpJ8KyN11gc0Lm",
+  "meta": null,
+  "name": "AI Blog Generator 🟢 copy",
+  "nodes": [
+    {
+      "parameters": {
+        "multipleMethods": true,
+        "path": "75deea03-36b8-40d9-9e3d-c0791adddc41",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        80,
+        40
+      ],
+      "id": "11220ba4-5b57-4968-9460-88fce7ef92b8",
+      "name": "Webhook",
+      "webhookId": "75deea03-36b8-40d9-9e3d-c0791adddc41",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "859ba768-9ae1-4d11-bab9-6b5f085adc59",
+              "name": "Keyword",
+              "value": "={{ $json.body.keywords }}",
+              "type": "string"
+            },
+            {
+              "id": "b3573a88-035d-45bd-8d68-3d384bd7c507",
+              "name": "topic",
+              "value": "={{ $json.body.topic }}",
+              "type": "string"
+            },
+            {
+              "id": "92389380-3f57-4191-b3cf-a6015767afff",
+              "name": "tone",
+              "value": "={{ $json.body.tone }}",
+              "type": "string"
+            },
+            {
+              "id": "f179e8f9-1470-4029-ad0d-12eff88c36fa",
+              "name": "audience",
+              "value": "={{ $json.body.audience }}",
+              "type": "string"
+            },
+            {
+              "id": "a634185a-d20e-4adc-85ae-0ee3220be32d",
+              "name": "style",
+              "value": "={{ $json.body.style }}",
+              "type": "string"
+            },
+            {
+              "id": "ca56e64a-9391-422b-b681-b661673eef06",
+              "name": "instructions",
+              "value": "={{ $json.body.instructions }}",
+              "type": "string"
+            },
+            {
+              "id": "4a21794c-6a9a-4c08-8641-0f08d5e46302",
+              "name": "includeIntro",
+              "value": "={{ $json[\"body\"][\"structure\"].includeIntro ? \"includeIntro\" : \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "e8e4572d-90f1-412f-a521-ed692f6ba105",
+              "name": "includeTOC",
+              "value": "={{ $json.body.structure.includeTOC? \"includeTOC\" : \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "4203e02a-d0ae-40eb-a386-0fa036d3b97c",
+              "name": "includeConclusion",
+              "value": "={{ $json.body.structure.includeConclusion }}",
+              "type": "string"
+            },
+            {
+              "id": "80a27780-cdea-4721-a51d-335f96b2e908",
+              "name": "wordCount",
+              "value": "={{ $json.body.wordCount }}",
+              "type": "string"
+            },
+            {
+              "id": "b5f90024-2942-45aa-8912-fc2c0cceb202",
+              "name": "seo_optimize",
+              "value": "={{ $json.body.seo.optimize }}",
+              "type": "string"
+            },
+            {
+              "id": "73243c33-5853-42d3-9d2d-dc246ffe779d",
+              "name": "seo_includeMeta",
+              "value": "={{ $json.body.seo.includeMeta }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "7027433f-f050-40f9-8eae-34b6e61ab33b",
+      "name": "Set strategy globals",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        400,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "toolDescription": "call this tool to scrap the web for the top ranking pages",
+        "method": "POST",
+        "url": "https://api.scrapingrobot.com",
+        "sendQuery": true,
+        "parametersQuery": {
+          "values": [
+            {
+              "name": "token",
+              "valueProvider": "fieldValue",
+              "value": "7cee704d-3353-4f8f-908a-d650f4564c51"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "parametersHeaders": {
+          "values": [
+            {
+              "name": "accept",
+              "valueProvider": "fieldValue",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"url\": \"https://www.google.com\",\n  \"module\": \"GoogleScraper\",\n  \"params\": {\n    \"query\": \"{keyword}\"\n  }\n} ",
+        "placeholderDefinitions": {
+          "values": [
+            {
+              "name": "keyword",
+              "description": "The keyword we are searching for on Google. This will be sent to the tool to give us the top pags"
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        740,
+        860
+      ],
+      "id": "05ff067e-f053-4add-b7a8-d97758abee25",
+      "name": "SERP_search"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        860
+      ],
+      "id": "d936237d-2f6d-4f62-b375-b6dfd91f7d10",
+      "name": "Wikipedia1"
+    },
+    {
+      "parameters": {
+        "name": "page_scrapper",
+        "description": "call this tool to scrap individual pages on the web",
+        "workflowId": {
+          "__rl": true,
+          "value": "={{ $workflow.id }}",
+          "mode": "id"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        900,
+        860
+      ],
+      "id": "520678b1-57e0-4c28-8ba2-989b72af92eb",
+      "name": "Page scrapper"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output || $json.text  }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=You're an experienced writer with a skill for creating highly engaging blog posts that capture the attention of your audience and deliver value.   Create an outline for blog post on the topic of {{ $('Set strategy globals').item.json.topic }} for a audience {{ $('Set strategy globals').item.json.audience }} of \n\nKeywords: {{ $('Set strategy globals').item.json.Keyword }}\nTone: {{ $('Set strategy globals').item.json.tone }}\naudience: {{ $('Set strategy globals').item.json.audience }}\nCustom Instructions: {{ $('Set strategy globals').item.json.instructions }}\nstyle: {{ $('Set strategy globals').item.json.style }}\nMake it a minimum of {{ $('Set strategy globals').item.json.wordCount }} Words.\n\n\nWhen drafting the outline, take into account my key point of view [YOUR QUICK TAKE ON THE TOPIC] to inform the framing and crucial sections to include in the outline.   Gather inspiration from other successful articles on this topic to make sure we’re not leaving out any important points and sections. Use SEO best practices to ensure proper use of keywords in headings."
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [
+        1320,
+        340
+      ],
+      "id": "a6f0cbd0-f948-468c-a7bd-987eb90e43b3",
+      "name": "Draft Writer"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=SEO FORMATTER – PRESENTATION STRATEGIST\nYou are an SEO Presentation Strategist Agent.\nUpon receiving the article draft: \n\n{{ $json.output || $json.text  }}, \n\n\nyour role is to:\n1.\tOptimize the visual hierarchy using well-structured headings (H1, H2, H3) and subheadings for maximum readability.\n2.\tBreak content into bite-sized, reader-friendly paragraphs, adding bullet points, numbered lists, or tables where necessary.\n3.\tEnsure logical transitions between sections to create a smooth reading experience.\n4.\tBold or highlight key takeaways for skimming readers, while ensuring keyword placement is natural and strategic.\n5.\tOptimize for mobile responsiveness, ensuring the content looks and performs well across all devices.\nDeliver an article that is visually appealing, engaging, and designed to boost SEO rankings by adhering to both reader and search engine preferences."
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [
+        2020,
+        180
+      ],
+      "id": "9e9ab07a-4d5e-40ad-97f9-4de022f5ec5d",
+      "name": "Senior Editor - Reviewer"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-4o-mini",
+        "options": {
+          "baseURL": "https://openrouter.ai/api/v1"
+        }
+      },
+      "id": "b7beff90-02a9-4586-a39a-9354bef9d8b8",
+      "name": "OpenAI Chat Model8",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        2260,
+        480
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "1JBBIaXSHGKDHZKq",
+          "name": "Openrouter✅"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a Human-Touch Content Authenticity Specialist.\nWhen provided with formatted content: {{ $json.output || $json.text  }}, your task is to:\n1.\tTransform the content into a human-centric narrative that feels organic, professional, and engaging.\n2.\tAdd a conversational yet authoritative tone by infusing:\no\tIdiomatic expressions and varied sentence styles.\no\tPersonal anecdotes or subtle storytelling elements when relevant.\n3.\tEliminate any repetitive or robotic patterns to make the writing feel dynamic and personally crafted.\n4.\tIntegrate emotional resonance and relatable scenarios while preserving professional integrity.\n5.\tConduct a final review ensuring the writing remains SEO-rich, reader-oriented, and undetectable as AI-generated.\nYour ultimate objective is to create genuine, relatable, and premium content that fosters trust and delivers unmatched value, outperforming AI-detectable competitors.\n\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [
+        2320,
+        180
+      ],
+      "id": "c1a741aa-f8cb-440c-98c0-29e6350e1631",
+      "name": "John the Human"
+    },
+    {
+      "parameters": {
+        "model": "mistral-large-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        660
+      ],
+      "id": "a031fe31-28f8-433a-bb82-99776d921ff1",
+      "name": "Mistral Cloud Chat Model",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "ja490hUjKCOlSnOl",
+          "name": "Mistral Cloud account✅"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.output || $json.text  }}\n\n\nWrite a 1,500 word (minimum) article using the outline above, taking into account the same audience, topic, and tone guidelines. \n\nUse list formatting as much as possible, where appropriate. Structure the format of the article for maximum scannability and readability. \n\nGather inspiration from other successful, high-ranking articles on the same topic. Go into each section and provide deeper and meaningful insights that will be useful to the reader"
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.5,
+      "position": [
+        1640,
+        340
+      ],
+      "id": "38885e30-45a8-428f-b442-eb5177f57ee9",
+      "name": "Senior Writer"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4b777f91-4730-4b0e-b7c1-72828309f39b",
+              "name": "Title",
+              "value": "={{ $json.text.match(/^# (.+)$/m) ? $json.text.match(/^# (.+)$/m)[1] : null }}",
+              "type": "string"
+            },
+            {
+              "id": "b37e34fb-fce4-49b7-a608-bce62fdb5da3",
+              "name": "Blog",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            },
+            {
+              "id": "d86ba2a3-fcd3-4bfe-8774-9e73d01e7fe9",
+              "name": "Keyword",
+              "value": "={{ $('Set strategy globals').item.json.Keyword }}",
+              "type": "string"
+            },
+            {
+              "id": "24e45db9-f8bc-4c56-9a81-49ee3f36b6ca",
+              "name": "topic",
+              "value": "={{ $('Set strategy globals').item.json.topic }}",
+              "type": "string"
+            },
+            {
+              "id": "ffb1e6d1-00c5-49bd-a521-1772262441b1",
+              "name": "tone",
+              "value": "={{ $('Set strategy globals').item.json.tone }}",
+              "type": "string"
+            },
+            {
+              "id": "2180d474-5298-4a5e-b592-771a3ce730c9",
+              "name": "audience",
+              "value": "={{ $('Set strategy globals').item.json.audience }}",
+              "type": "string"
+            },
+            {
+              "id": "1f811ca2-770c-41d1-ab35-144e9d90e3d6",
+              "name": "style",
+              "value": "={{ $('Set strategy globals').item.json.style }}",
+              "type": "string"
+            },
+            {
+              "id": "d0d431f6-9606-46cf-858c-dfd365b23d2e",
+              "name": "instructions",
+              "value": "={{ $('Set strategy globals').item.json.instructions }}",
+              "type": "string"
+            },
+            {
+              "id": "2ffec7f1-78e3-4f35-aa6e-6cca6bb07ab0",
+              "name": "Word Count",
+              "value": "={{ $json.text.split(\" \").length }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2680,
+        240
+      ],
+      "id": "0b4edfe1-a678-4eb8-9faf-1f65f2641f5a",
+      "name": "Extract title"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1SClgH5vCQImJl9Tu1ysTHVs_phQBN2Q0ixBJVssNg6Q",
+          "mode": "list",
+          "cachedResultName": "SEO DOCTOR - DataBase",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SClgH5vCQImJl9Tu1ysTHVs_phQBN2Q0ixBJVssNg6Q/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1597797572,
+          "mode": "list",
+          "cachedResultName": "Blog Writing",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SClgH5vCQImJl9Tu1ysTHVs_phQBN2Q0ixBJVssNg6Q/edit#gid=1597797572"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "output",
+              "displayName": "output",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "topic",
+              "displayName": "topic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Introduction_Hook",
+              "displayName": "Introduction_Hook",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Topic Importance",
+              "displayName": "Topic Importance",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Preview",
+              "displayName": "Preview",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Blog",
+              "displayName": "Blog",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Keyword",
+              "displayName": "Keyword",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "tone",
+              "displayName": "tone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "audience",
+              "displayName": "audience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "style",
+              "displayName": "style",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "instructions",
+              "displayName": "instructions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "wordCount",
+              "displayName": "wordCount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Word Count",
+              "displayName": "Word Count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        2840,
+        240
+      ],
+      "id": "259464d6-700e-495a-93e1-4baf81bb1e8c",
+      "name": "Google Sheets",
+      "retryOnFail": true,
+      "maxTries": 5,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ZAI2a6Qt80kX5a9s",
+          "name": "Google Sheets account✅ "
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "579a8bad-03c8-4ee7-b204-05a131283e05",
+              "name": "webhook",
+              "value": "https://dev.funautomations.io/webhook-test/60c1ba8c-b8be-429a-9443-89b56e542957",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        780,
+        200
+      ],
+      "id": "7be6b4f3-952a-43ef-ac1f-b718d774736b",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>AI Blog Generator</title>\n    <script src=\"https://cdn.jsdelivr.net/npm/marked/marked.min.js\"></script>\n    <style>\n        /* Root Variables */\n        :root {\n            --primary-color: #3b82f6;\n            --secondary-color: #10b981;\n            --background-color: #f8fafc;\n            --text-color: #1f2937;\n            --border-color: #e2e8f0;\n        }\n\n        /* Base Styles */\n        body {\n            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;\n            background-color: var(--background-color);\n            margin: 0;\n            padding: 20px;\n            line-height: 1.6;\n            color: var(--text-color);\n        }\n\n        /* Container and Layout */\n        .container {\n            max-width: 1200px;\n            margin: 0 auto;\n            background-color: white;\n            border-radius: 12px;\n            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);\n            padding: 30px;\n        }\n\n        .title {\n            text-align: center;\n            color: var(--text-color);\n            font-size: 2rem;\n            font-weight: 700;\n            margin-bottom: 30px;\n        }\n\n        /* Form Elements */\n        .input-group {\n            display: flex;\n            flex-direction: column;\n            gap: 20px;\n            margin-bottom: 20px;\n        }\n\n        .input-label {\n            font-weight: 600;\n            color: var(--text-color);\n            margin-bottom: 5px;\n            display: block;\n        }\n\n        input, select, textarea {\n            padding: 12px 16px;\n            border: 2px solid var(--border-color);\n            border-radius: 8px;\n            font-size: 1rem;\n            transition: all 0.3s ease;\n            width: 100%;\n            box-sizing: border-box;\n        }\n\n        input:focus, select:focus, textarea:focus {\n            outline: none;\n            border-color: var(--primary-color);\n            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);\n        }\n\n        select {\n            background-color: white;\n            cursor: pointer;\n        }\n\n        textarea {\n            min-height: 100px;\n            resize: vertical;\n            font-family: inherit;\n            line-height: 1.6;\n        }\n\n        /* Advanced Settings */\n        .advanced-settings {\n            margin-top: 20px;\n            border: 1px solid var(--border-color);\n            border-radius: 8px;\n            overflow: hidden;\n        }\n\n        .advanced-toggle {\n            width: 100%;\n            padding: 15px;\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            background: none;\n            border: none;\n            cursor: pointer;\n            font-weight: 600;\n            color: var(--text-color);\n        }\n\n        .advanced-toggle svg {\n            transition: transform 0.3s ease;\n        }\n\n        .advanced-toggle.active svg {\n            transform: rotate(180deg);\n        }\n\n        .advanced-options {\n            display: none;\n            padding: 20px;\n            border-top: 1px solid var(--border-color);\n            background-color: var(--background-color);\n        }\n\n        .settings-grid {\n            display: grid;\n            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));\n            gap: 20px;\n        }\n\n        .checkbox-group {\n            display: flex;\n            align-items: center;\n            gap: 8px;\n            margin-bottom: 10px;\n        }\n\n        .checkbox-group input[type=\"checkbox\"] {\n            width: 16px;\n            height: 16px;\n        }\n\n        input[type=\"number\"] {\n            padding: 8px 12px;\n        }\n\n        /* Buttons */\n        .generate-btn {\n            background-color: var(--primary-color);\n            color: white;\n            border: none;\n            padding: 14px 28px;\n            cursor: pointer;\n            border-radius: 8px;\n            font-size: 1.1rem;\n            font-weight: 600;\n            transition: all 0.3s ease;\n            width: 100%;\n            margin-top: 20px;\n        }\n\n        .generate-btn:hover {\n            background-color: #2563eb;\n            transform: translateY(-1px);\n        }\n\n        .generate-btn:disabled {\n            background-color: #93c5fd;\n            cursor: not-allowed;\n            transform: none;\n        }\n\n        .action-buttons {\n            display: flex;\n            gap: 10px;\n            margin-bottom: 20px;\n            flex-wrap: wrap;\n        }\n\n        .action-button {\n            padding: 8px 16px;\n            border-radius: 6px;\n            cursor: pointer;\n            font-size: 0.9rem;\n            transition: all 0.3s ease;\n            background-color: var(--secondary-color);\n            color: white;\n            border: none;\n            display: flex;\n            align-items: center;\n            gap: 6px;\n        }\n\n        .action-button:hover {\n            opacity: 0.9;\n        }\n\n        /* Loader and Messages */\n        .loader {\n            display: none;\n            width: 48px;\n            height: 48px;\n            border: 4px solid #f3f3f3;\n            border-top: 4px solid var(--primary-color);\n            border-radius: 50%;\n            margin: 20px auto;\n            animation: spin 1s linear infinite;\n        }\n\n        @keyframes spin {\n            0% { transform: rotate(0deg); }\n            100% { transform: rotate(360deg); }\n        }\n\n        .error-message {\n            display: none;\n            color: #dc2626;\n            background-color: #fee2e2;\n            border: 1px solid #fecaca;\n            padding: 16px;\n            border-radius: 8px;\n            margin-bottom: 20px;\n            font-weight: 500;\n        }\n\n        /* Result Container */\n        .result-container {\n            display: none;\n            margin-top: 30px;\n        }\n\n        .markdown-content {\n            padding: 25px;\n            background-color: white;\n            border-radius: 8px;\n            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n            line-height: 1.8;\n        }\n\n        .raw-markdown {\n            display: none;\n            white-space: pre-wrap;\n            font-family: monospace;\n            background-color: #f1f5f9;\n            padding: 20px;\n            border-radius: 8px;\n            overflow-x: auto;\n        }\n\n        /* Responsive Design */\n        @media (max-width: 768px) {\n            .container {\n                padding: 20px;\n            }\n\n            .title {\n                font-size: 1.5rem;\n            }\n\n            .settings-grid {\n                grid-template-columns: 1fr;\n            }\n\n            .action-buttons {\n                flex-direction: column;\n            }\n\n            .action-button {\n                width: 100%;\n                justify-content: center;\n            }\n        }\n    </style>\n</head>\n\n\n<body>\n    <div class=\"container\">\n        <h1 class=\"title\">AI Blog Generator</h1>\n        \n        <div class=\"input-group\">\n            <!-- Basic Settings -->\n            <div>\n                <label class=\"input-label\" for=\"topic\">Blog Topic</label>\n                <input type=\"text\" id=\"topic\" placeholder=\"Enter your blog topic\">\n            </div>\n\n            <div>\n                <label class=\"input-label\" for=\"keywords\">Keywords (optional)</label>\n                <input type=\"text\" id=\"keywords\" placeholder=\"Enter keywords separated by commas\">\n            </div>\n\n            <div>\n                <label class=\"input-label\" for=\"audience\">Target Audience</label>\n                <select id=\"audience\">\n                    <option value=\"general\">General Audience</option>\n                    <option value=\"beginners\">Beginners</option>\n                    <option value=\"intermediate\">Intermediate</option>\n                    <option value=\"expert\">Expert</option>\n                    <option value=\"technical\">Technical</option>\n                </select>\n            </div>\n\n            <div>\n                <label class=\"input-label\" for=\"tone\">Writing Tone</label>\n                <select id=\"tone\">\n                    <option value=\"professional\">Professional</option>\n                    <option value=\"casual\">Casual</option>\n                    <option value=\"formal\">Formal</option>\n                    <option value=\"friendly\">Friendly</option>\n                    <option value=\"humorous\">Humorous</option>\n                </select>\n            </div>\n\n            <div>\n                <label class=\"input-label\" for=\"style\">Writing Style</label>\n                <select id=\"style\">\n                    <option value=\"informative\">Informative</option>\n                    <option value=\"conversational\">Conversational</option>\n                    <option value=\"persuasive\">Persuasive</option>\n                    <option value=\"analytical\">Analytical</option>\n                    <option value=\"storytelling\">Storytelling</option>\n                </select>\n            </div>\n\n            <!-- Custom Instructions -->\n            <div>\n                <label class=\"input-label\" for=\"instructions\">Custom Instructions</label>\n                <textarea id=\"instructions\" placeholder=\"Enter any specific requirements or points you want to include in your blog post...\"></textarea>\n            </div>\n\n            <!-- Advanced Settings -->\n            <div class=\"advanced-settings\">\n                <button type=\"button\" class=\"advanced-toggle\" onclick=\"toggleAdvanced()\">\n                    <span>Advanced Settings</span>\n                    <svg width=\"12\" height=\"12\" viewBox=\"0 0 12 12\" fill=\"none\" stroke=\"currentColor\">\n                        <path d=\"M2 4L6 8L10 4\" stroke-width=\"2\"/>\n                    </svg>\n                </button>\n\n                <div id=\"advancedOptions\" class=\"advanced-options\">\n                    <div class=\"settings-grid\">\n                        <div>\n                            <label class=\"input-label\">Structure</label>\n                            <div class=\"checkbox-group\">\n                                <input type=\"checkbox\" id=\"includeIntro\" checked>\n                                <label for=\"includeIntro\">Introduction</label>\n                            </div>\n                            <div class=\"checkbox-group\">\n                                <input type=\"checkbox\" id=\"includeTOC\">\n                                <label for=\"includeTOC\">Table of Contents</label>\n                            </div>\n                            <div class=\"checkbox-group\">\n                                <input type=\"checkbox\" id=\"includeConclusion\" checked>\n                                <label for=\"includeConclusion\">Conclusion</label>\n                            </div>\n                        </div>\n\n                        <div>\n                            <label class=\"input-label\">Word Count</label>\n                            <input type=\"number\" id=\"wordCount\" value=\"1000\" min=\"300\" max=\"5000\" step=\"100\">\n                        </div>\n\n                        <div>\n                            <label class=\"input-label\">Elements</label>\n                            <div class=\"checkbox-group\">\n                                <input type=\"checkbox\" id=\"includeExamples\" checked>\n                                <label for=\"includeExamples\">Examples</label>\n                            </div>\n                            <div class=\"checkbox-group\">\n                                <input type=\"checkbox\" id=\"includeStats\">\n                                <label for=\"includeStats\">Statistics</label>\n                            </div>\n                            <div class=\"checkbox-group\">\n                                <input type=\"checkbox\" id=\"includeFAQ\">\n                                <label for=\"includeFAQ\">FAQ Section</label>\n                            </div>\n                        </div>\n\n                        <div>\n                            <label class=\"input-label\">SEO Options</label>\n                            <div class=\"checkbox-group\">\n                                <input type=\"checkbox\" id=\"optimizeSEO\" checked>\n                                <label for=\"optimizeSEO\">SEO Optimization</label>\n                            </div>\n                            <div class=\"checkbox-group\">\n                                <input type=\"checkbox\" id=\"includeMeta\">\n                                <label for=\"includeMeta\">Meta Description</label>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n\n            <button id=\"generateButton\" class=\"generate-btn\">Generate Blog Post</button>\n        </div>\n\n        <div id=\"errorMessage\" class=\"error-message\"></div>\n        <div id=\"loader\" class=\"loader\"></div>\n\n        <div id=\"resultContainer\" class=\"result-container\">\n            <div class=\"action-buttons\">\n                <button onclick=\"copyContent('markdown')\" class=\"action-button\">\n                    <svg width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n                        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3\"/>\n                    </svg>\n                    Copy Markdown\n                </button>\n                <button onclick=\"downloadMarkdown()\" class=\"action-button\">\n                    <svg width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n                        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4\"/>\n                    </svg>\n                    Download Markdown\n                </button>\n                <button onclick=\"togglePreview()\" class=\"action-button\">\n                    <svg width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" viewBox=\"0 0 24 24\">\n                        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M15 12a3 3 0 11-6 0 3 3 0 016 0z\"/>\n                        <path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z\"/>\n                    </svg>\n                    Toggle Preview\n                </button>\n            </div>\n            <div id=\"markdownContent\" class=\"markdown-content\"></div>\n            <pre id=\"rawMarkdown\" class=\"raw-markdown\"></pre>\n        </div>\n    </div>\n\n                           <script>\n        const generateButton = document.getElementById('generateButton');\n        const loader = document.getElementById('loader');\n        const errorMessage = document.getElementById('errorMessage');\n        const resultContainer = document.getElementById('resultContainer');\n        const markdownContent = document.getElementById('markdownContent');\n        const rawMarkdown = document.getElementById('rawMarkdown');\n\n        let currentMarkdown = '';\n\n        marked.setOptions({\n            breaks: true,\n            gfm: true\n        });\n\n        function showError(message) {\n            errorMessage.textContent = message;\n            errorMessage.style.display = 'block';\n        }\n\n        function hideError() {\n            errorMessage.style.display = 'none';\n        }\n\n        function displayMarkdownContent(markdown) {\n            currentMarkdown = markdown;\n            markdownContent.innerHTML = marked.parse(markdown);\n            rawMarkdown.textContent = markdown;\n            resultContainer.style.display = 'block';\n        }\n\n        function copyContent(type) {\n            const content = type === 'markdown' ? currentMarkdown : markdownContent.innerHTML;\n            navigator.clipboard.writeText(content).then(() => {\n                alert('Content copied to clipboard!');\n            }).catch(err => {\n                console.error('Failed to copy text: ', err);\n            });\n        }\n\n        function downloadMarkdown() {\n            const blob = new Blob([currentMarkdown], { type: 'text/markdown' });\n            const url = URL.createObjectURL(blob);\n            const a = document.createElement('a');\n            a.href = url;\n            a.download = 'blog-post.md';\n            document.body.appendChild(a);\n            a.click();\n            document.body.removeChild(a);\n            URL.revokeObjectURL(url);\n        }\n\n        function togglePreview() {\n            if (markdownContent.style.display === 'none') {\n                markdownContent.style.display = 'block';\n                rawMarkdown.style.display = 'none';\n            } else {\n                markdownContent.style.display = 'none';\n                rawMarkdown.style.display = 'block';\n            }\n        }\n\n\n      // Add this JavaScript function:\n\nfunction toggleAdvanced() {\n    const advancedOptions = document.getElementById('advancedOptions');\n    const toggle = document.querySelector('.advanced-toggle');\n    \n    if (advancedOptions.style.display === 'block') {\n        advancedOptions.style.display = 'none';\n        toggle.classList.remove('active');\n    } else {\n        advancedOptions.style.display = 'block';\n        toggle.classList.add('active');\n    }\n}\n\n\n\nasync function generateBlog() {\n    const topic = document.getElementById('topic').value.trim();\n    const keywords = document.getElementById('keywords').value.trim();\n    const audience = document.getElementById('audience').value;\n    const tone = document.getElementById('tone').value;\n    const style = document.getElementById('style').value;\n    const instructions = document.getElementById('instructions').value.trim();\n\n    // Advanced options\n    const structure = {\n        includeIntro: document.getElementById('includeIntro').checked,\n        includeTOC: document.getElementById('includeTOC').checked,\n        includeConclusion: document.getElementById('includeConclusion').checked\n    };\n\n    const wordCount = document.getElementById('wordCount').value;\n    \n    const elements = {\n        includeExamples: document.getElementById('includeExamples').checked,\n        includeStats: document.getElementById('includeStats').checked,\n        includeFAQ: document.getElementById('includeFAQ').checked\n    };\n\n    const seo = {\n        optimize: document.getElementById('optimizeSEO').checked,\n        includeMeta: document.getElementById('includeMeta').checked\n    };\n\n    if (!topic) {\n        showError('Please enter a blog topic');\n        return;\n    }\n\n    try {\n        hideError();\n        loader.style.display = 'block';\n        resultContainer.style.display = 'none';\n        generateButton.disabled = true;\n\n        const response = await fetch('https://dev.funautomations.io/webhook-test/60c1ba8c-b8be-429a-9443-89b56e542957', {\n            method: 'POST',\n            headers: {\n                'Content-Type': 'application/json',\n            },\n            body: JSON.stringify({\n                topic,\n                keywords,\n                audience,\n                tone,\n                style,\n                instructions,\n                structure,\n                wordCount,\n                elements,\n                seo\n            })\n        });\n\n        if (!response.ok) {\n            throw new Error('Failed to generate blog post');\n        }\n\n        const markdownContent = await response.text();\n        displayMarkdownContent(markdownContent);\n\n    } catch (error) {\n        showError(error.message);\n    } finally {\n        loader.style.display = 'none';\n        generateButton.disabled = false;\n    }\n}\n\ngenerateButton.addEventListener('click', generateBlog);\n                             \n    </script>\n</body>\n</html>\n\n"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        960,
+        200
+      ],
+      "id": "ec5c879e-d364-4338-a235-e5ed5b8e36d0",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.html }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1120,
+        200
+      ],
+      "id": "ac485734-27d2-4af1-89ee-a5c653ef0bd8",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        2660,
+        60
+      ],
+      "id": "a01a1174-7577-4ab7-9681-1525859205d6",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "model": "mistral-large-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        580,
+        860
+      ],
+      "id": "cd790550-d8a1-4ae8-9d87-f3252e66bcb2",
+      "name": "Mistral Cloud Chat Model1",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "ja490hUjKCOlSnOl",
+          "name": "Mistral Cloud account✅"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        140,
+        620
+      ],
+      "id": "226e2d0e-96b0-422f-a61b-3bda6ee2b049",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.topic }}\n\nAlways send the data using the following format \n\n```\n{\n  \"url\": \"https://www.google.com\",\n  \"module\": \"GoogleScraper\",\n  \"params\": {\n    \"query\": \"your topic\"\n  }\n} \n```\n\nTo get deepr insights about each website that we get, we can use the page_scrapper to go into each of the websites and get the results for each for bettre analysis\n\n\nYou are a Knowledge Research Specialist Agent.\nWhen provided with a topic or headline for an SEO blog article, your mission is to:\n1.\tPerform advanced web searches, leveraging reputable sources and factual databases.\n2.\tExtract actionable insights, cutting-edge data, and uncommon perspectives to craft a unique angle for the topic.\n3.\tAnalyze competitors’ content and highlight gaps or opportunities for improvement.\n4.\tDeliver concise, SEO-rich summaries focusing on key points, emerging trends, and details that position the content as a leading resource in its domain.\nYour ultimate goal is to equip the user with superior material that ensures informational depth, enhances SEO performance, and fosters engagement with the target audience.\n",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        700,
+        620
+      ],
+      "id": "7c366032-f1f3-463a-86b3-365c89f33e1d",
+      "name": "Web Researcher"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1e5c88bd-cb6c-4b12-bb13-96884c83e06f",
+              "name": "response",
+              "value": "={{ $json.mainContent }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "24d32d3f-5a9d-4610-8e33-914b43f565bf",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.3,
+      "position": [
+        1820,
+        680
+      ],
+      "alwaysOutputData": true,
+      "retryOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {}
+      },
+      "id": "55cb6df6-debe-4c7f-b072-fa66a2aa662e",
+      "name": "GET WEBSITE CONTENT",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1760,
+        980
+      ],
+      "retryOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Function to clean HTML content by removing unnecessary elements like images, scripts, styles, etc.\nconst cleanHTML = (html) => {\n  // Remove images, scripts, and styles\n  const cleaned = html\n    .replace(/<img[^>]*>/g, '')  // Remove images\n    .replace(/<script[^>]*>.*?<\\/script>/gs, '')  // Remove JavaScript\n    .replace(/<style[^>]*>.*?<\\/style>/gs, '')  // Remove CSS\n    .replace(/<[^>]+>/g, '')  // Remove other HTML tags\n    .replace(/\\s+/g, ' ') // Collapse multiple spaces\n    .trim();  // Trim leading and trailing whitespace\n  return cleaned;\n};\n\n// Function to extract the page title from HTML\nconst extractTitle = (html) => {\n  const regex = /<title>(.*?)<\\/title>/;\n  const match = html.match(regex);\n  return match ? match[1] : '';  // If a title is found, return it, otherwise return an empty string\n};\n\n// Function to extract the meta description from HTML\nconst extractMetaDescription = (html) => {\n  const regex = /<meta\\s+name=\"description\"\\s+content=\"(.*?)\"/;\n  const match = html.match(regex);\n  return match ? match[1] : '';  // If a meta description is found, return it, otherwise return an empty string\n};\n\n// Access the HTML content from the 'data' column in the incoming JSON\nconst htmlContent = $json[\"data\"]; // Assuming the HTML content is in the \"data\" column\n\n// Clean the HTML content\nconst cleanedHtml = cleanHTML(htmlContent);\n\n// Extract the page title and meta description\nconst pageTitle = extractTitle(htmlContent);\nconst metaDescription = extractMetaDescription(htmlContent);\n\n// Return the cleaned content, title, and meta description as output\nreturn {\n  pageTitle,\n  metaDescription,\n  cleanedHtml\n};\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1940,
+        980
+      ],
+      "id": "2d02d528-310f-4661-9408-59f93dab51a8",
+      "name": "Code",
+      "retryOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        1380,
+        980
+      ],
+      "id": "0c586630-d583-4c5a-b30a-47c8bde4bc99",
+      "name": "Execute Workflow Trigger"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "797cc24b-8f37-403f-af3f-d4b4bd4d3849",
+              "name": "url",
+              "value": "={{ $json.query }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1560,
+        980
+      ],
+      "id": "4aa0d90b-9dae-4ccb-93e4-88e2a6794779",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "blog-writer",
+          "mode": "list",
+          "cachedResultName": "blog-writer"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        2120,
+        980
+      ],
+      "id": "b2cfeb1c-c499-4660-ad59-33c8218d3c3c",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "shmrZUe4akeAvFKD",
+          "name": "PineconeApi account✅"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsMistralCloud",
+      "typeVersion": 1,
+      "position": [
+        2080,
+        1240
+      ],
+      "id": "15afc9f4-9f4a-4d93-8c5f-35b5bfa969a7",
+      "name": "Embeddings Mistral Cloud",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "ja490hUjKCOlSnOl",
+          "name": "Mistral Cloud account✅"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "title",
+                "value": "={{ $('Code').item.json.pageTitle }}"
+              }
+            ]
+          }
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        2380,
+        1240
+      ],
+      "id": "8f195464-392d-4a06-a031-e0cd8aa258d7",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 10,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        2480,
+        1460
+      ],
+      "id": "1179654f-456b-445d-9b30-600ea1d7c4d9",
+      "name": "Recursive Character Text Splitter"
+    }
+  ],
+  "pinData": {
+    "Webhook": [],
+    "Set strategy globals": [
+      {
+        "json": {
+          "Keyword": "Email campaigns",
+          "topic": "Personalizing email content based on user behavior.",
+          "tone": "professional",
+          "audience": "general",
+          "style": "informative",
+          "instructions": "Make this as detailed as posible",
+          "includeIntro": "includeIntro",
+          "includeTOC": "",
+          "includeConclusion": "true",
+          "wordCount": "1000",
+          "seo_optimize": "true",
+          "seo_includeMeta": "false"
+        }
+      }
+    ],
+    "Execute Workflow Trigger": [
+      {
+        "json": {
+          "query": "https://n8n.io"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "errorWorkflow": "2gLR5bciIZCpJZRE"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-12-12T05:10:41.468Z",
+      "updatedAt": "2024-12-12T05:10:41.468Z",
+      "id": "745L3wkBRWVTKwlU",
+      "name": "V2"
+    },
+    {
+      "createdAt": "2024-12-04T12:32:00.284Z",
+      "updatedAt": "2024-12-04T12:32:00.284Z",
+      "id": "bNah9fcKNwQQBzJ1",
+      "name": "SEO DOCTOR"
+    },
+    {
+      "createdAt": "2024-12-03T14:36:18.275Z",
+      "updatedAt": "2024-12-03T14:36:18.275Z",
+      "id": "koKAFcp5uch8EPTB",
+      "name": "Public"
+    }
+  ],
+  "triggerCount": 2,
+  "updatedAt": "2025-01-07T16:15:28.970Z",
+  "versionId": "6e6e089d-b12f-41b0-9b9b-0f36f5d7c301"
+}

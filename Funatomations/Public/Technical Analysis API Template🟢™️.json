@@ -1,11 +1,23 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
-    "techical analyis ✅2": {
+    "Receive url to scrap": {
       "main": [
         [
           {
-            "node": "Respond to Webhook✅1",
+            "node": "Set Get fields✅",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Set Get fields✅": {
+      "main": [
+        [
+          {
+            "node": "techical analyis ✅",
             "type": "main",
             "index": 0
           }
@@ -22,46 +34,6 @@
           }
         ]
       ]
-    },
-    "Receive url to scrap": {
-      "main": [
-        [
-          {
-            "node": "Set Get fields✅",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Set Post fields✅",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Set Get fields✅": {
-      "main": [
-        [
-          {
-            "node": "techical analyis ✅2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Set Post fields✅": {
-      "main": [
-        [
-          {
-            "node": "techical analyis ✅",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
     }
   },
   "createdAt": "2024-12-13T05:46:43.481Z",
@@ -73,33 +45,6 @@
   "nodes": [
     {
       "parameters": {
-        "jsCode": "const cheerio = require('cheerio');\nconst axios = require('axios');\n\nreturn Promise.all(items.map(async (item) => {\n  const url = item.json.url;\n\n  if (!url) {\n    return { json: { error: \"No URL provided\" } };\n  }\n\n  try {\n    // Fetch the HTML content from the URL\n    const response = await axios.get(url);\n    const html = response.data;\n\n    // Load HTML into Cheerio\n    const $ = cheerio.load(html);\n\n    // Extract the title tag\n    const title = $('title').text() || \"No title found\";\n\n    // Extract the meta description\n    const metaDescription = $('meta[name=\"description\"]').attr('content') || \"No description found\";\n\n    // Extract the canonical URL\n    const canonical = $('link[rel=\"canonical\"]').attr('href') || \"No canonical URL found\";\n\n    // Extract all headings (H1, H2, H3, etc.)\n    const headings = [];\n    $('h1, h2, h3, h4, h5, h6').each((i, el) => {\n      headings.push({\n        level: el.name,\n        text: $(el).text().trim()\n      });\n    });\n\n    // Extract internal and external links with anchor texts\n    const internalLinks = [];\n    const externalLinks = [];\n    $('a').each((i, el) => {\n      const href = $(el).attr('href');\n      const anchorText = $(el).text().trim();\n\n      if (href) {\n        if (href.startsWith('/') || href.includes(url)) {\n          internalLinks.push({ href, anchorText: anchorText || \"No anchor text\" });\n        } else {\n          externalLinks.push({ href, anchorText: anchorText || \"No anchor text\" });\n        }\n      }\n    });\n\n    // Extract robots meta tag\n    const robotsMeta = $('meta[name=\"robots\"]').attr('content') || \"No robots meta found\";\n\n    // Extract Open Graph tags\n    const ogTags = {};\n    $('meta[property^=\"og:\"]').each((i, el) => {\n      const property = $(el).attr('property');\n      const content = $(el).attr('content');\n      if (property && content) {\n        ogTags[property.replace('og:', '')] = content;\n      }\n    });\n\n    // Extract structured data (JSON-LD)\n    const structuredData = [];\n    $('script[type=\"application/ld+json\"]').each((i, el) => {\n      try {\n        const json = JSON.parse($(el).html());\n        structuredData.push(json);\n      } catch (error) {\n        // Ignore invalid JSON\n      }\n    });\n\n    // Extract image details\n    const images = [];\n    $('img').each((i, el) => {\n      images.push({\n        src: $(el).attr('src') || \"No source\",\n        alt: $(el).attr('alt') || \"No alt text\",\n        width: $(el).attr('width') || \"No width\",\n        height: $(el).attr('height') || \"No height\"\n      });\n    });\n\n    // Analyze viewport meta tag\n    const viewportMeta = $('meta[name=\"viewport\"]').attr('content') || \"No viewport meta tag\";\n\n    // Calculate word count\n    const wordCount = $('body').text().split(/\\s+/).filter(word => word.length > 0).length;\n\n    // Check for missing alt attributes\n    const imagesWithoutAlt = images.filter(img => img.alt === \"No alt text\").length;\n\n    // Return the structured result\n    return {\n      json: {\n        url,\n        title,\n        metaDescription,\n        canonical,\n        headings,\n        internalLinks,\n        externalLinks,\n        robotsMeta,\n        openGraph: ogTags,\n        structuredData,\n        images,\n        imageAnalysis: {\n          totalImages: images.length,\n          imagesWithoutAlt\n        },\n        viewportMeta,\n        wordCount\n      }\n    };\n\n  } catch (error) {\n    return { json: { error: `Failed to fetch URL: ${url}`, details: error.message } };\n  }\n}));\n"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1200,
-        340
-      ],
-      "id": "8459f8e3-c92c-44cc-9c5c-28d4a227571a",
-      "name": "techical analyis ✅2"
-    },
-    {
-      "parameters": {
-        "jsCode": "const cheerio = require('cheerio');\nconst axios = require('axios');\n\nreturn Promise.all(items.map(async (item) => {\n  const url = item.json.url;\n\n  if (!url) {\n    return { json: { error: \"No URL provided\" } };\n  }\n\n  try {\n    // Fetch the HTML content from the URL\n    const response = await axios.get(url);\n    const html = response.data;\n\n    // Load HTML into Cheerio\n    const $ = cheerio.load(html);\n\n    // Extract the title tag\n    const title = $('title').text() || \"No title found\";\n\n    // Extract the meta description\n    const metaDescription = $('meta[name=\"description\"]').attr('content') || \"No description found\";\n\n    // Extract the canonical URL\n    const canonical = $('link[rel=\"canonical\"]').attr('href') || \"No canonical URL found\";\n\n    // Extract all headings (H1, H2, H3, etc.)\n    const headings = [];\n    $('h1, h2, h3, h4, h5, h6').each((i, el) => {\n      headings.push({\n        level: el.name,\n        text: $(el).text().trim()\n      });\n    });\n\n    // Extract internal and external links with anchor texts\n    const internalLinks = [];\n    const externalLinks = [];\n    $('a').each((i, el) => {\n      const href = $(el).attr('href');\n      const anchorText = $(el).text().trim();\n\n      if (href) {\n        if (href.startsWith('/') || href.includes(url)) {\n          internalLinks.push({ href, anchorText: anchorText || \"No anchor text\" });\n        } else {\n          externalLinks.push({ href, anchorText: anchorText || \"No anchor text\" });\n        }\n      }\n    });\n\n    // Extract robots meta tag\n    const robotsMeta = $('meta[name=\"robots\"]').attr('content') || \"No robots meta found\";\n\n    // Extract Open Graph tags\n    const ogTags = {};\n    $('meta[property^=\"og:\"]').each((i, el) => {\n      const property = $(el).attr('property');\n      const content = $(el).attr('content');\n      if (property && content) {\n        ogTags[property.replace('og:', '')] = content;\n      }\n    });\n\n    // Extract structured data (JSON-LD)\n    const structuredData = [];\n    $('script[type=\"application/ld+json\"]').each((i, el) => {\n      try {\n        const json = JSON.parse($(el).html());\n        structuredData.push(json);\n      } catch (error) {\n        // Ignore invalid JSON\n      }\n    });\n\n    // Extract image details\n    const images = [];\n    $('img').each((i, el) => {\n      images.push({\n        src: $(el).attr('src') || \"No source\",\n        alt: $(el).attr('alt') || \"No alt text\",\n        width: $(el).attr('width') || \"No width\",\n        height: $(el).attr('height') || \"No height\"\n      });\n    });\n\n    // Analyze viewport meta tag\n    const viewportMeta = $('meta[name=\"viewport\"]').attr('content') || \"No viewport meta tag\";\n\n    // Calculate word count\n    const wordCount = $('body').text().split(/\\s+/).filter(word => word.length > 0).length;\n\n    // Check for missing alt attributes\n    const imagesWithoutAlt = images.filter(img => img.alt === \"No alt text\").length;\n\n    // Return the structured result\n    return {\n      json: {\n        url,\n        title,\n        metaDescription,\n        canonical,\n        headings,\n        internalLinks,\n        externalLinks,\n        robotsMeta,\n        openGraph: ogTags,\n        structuredData,\n        images,\n        imageAnalysis: {\n          totalImages: images.length,\n          imagesWithoutAlt\n        },\n        viewportMeta,\n        wordCount\n      }\n    };\n\n  } catch (error) {\n    return { json: { error: `Failed to fetch URL: ${url}`, details: error.message } };\n  }\n}));\n"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1200,
-        540
-      ],
-      "id": "ee4d0a23-2aa9-4d30-894a-f4ddb04cc6d2",
-      "name": "techical analyis ✅"
-    },
-    {
-      "parameters": {
-        "multipleMethods": true,
         "path": "4b636734-8036-4011-b03a-f800a6151c5b",
         "responseMode": "responseNode",
         "options": {}
@@ -107,8 +52,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        760,
-        440
+        860,
+        320
       ],
       "id": "df81d75c-a935-4f3e-b360-eebb04d0d496",
       "name": "Receive url to scrap",
@@ -116,44 +61,12 @@
     },
     {
       "parameters": {
-        "respondWith": "allIncomingItems",
-        "options": {
-          "responseCode": 200
-        }
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [
-        1400,
-        540
-      ],
-      "id": "84cfe615-c2d8-4b5f-9190-25ef68203f5d",
-      "name": "Respond to Webhook✅"
-    },
-    {
-      "parameters": {
-        "respondWith": "allIncomingItems",
-        "options": {
-          "responseCode": 200
-        }
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [
-        1380,
-        340
-      ],
-      "id": "eda0aa42-5018-4b65-a30c-99791e091b67",
-      "name": "Respond to Webhook✅1"
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
               "id": "8cf122c2-6b60-433e-b3a9-90bd800186f3",
               "name": "url",
-              "value": "={{ \n  $json.query.website || $json.query.url \n    ? (($json.query.website || $json.query.url).startsWith('https://') \n        ? ($json.query.website || $json.query.url) \n        : 'https://' + ($json.query.website || $json.query.url)) \n    : '' \n}}\n",
+              "value": "={{ \n  $json.query.website || $json.query.url \n    ? (($json.query.website || $json.query.url).startsWith('https://') \n        ? ($json.query.website || $json.query.url) \n        : 'https://' + ($json.query.website || $json.query.url)) \n    : '' \n}}",
               "type": "string"
             }
           ]
@@ -163,96 +76,76 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1020,
-        340
+        1100,
+        320
       ],
       "id": "edcefd52-2794-4345-b0db-8776c121c90f",
       "name": "Set Get fields✅"
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "8cf122c2-6b60-433e-b3a9-90bd800186f3",
-              "name": "url",
-              "value": "={{ \n  ($json['Enter URL'] || $json.query.website) \n    ? (\n        ($json['Enter URL'] || $json.query.website).startsWith('https://') \n          ? ($json['Enter URL'] || $json.query.website)\n          : ($json['Enter URL'] || $json.query.website).startsWith('http://') \n            ? 'https://' + ($json['Enter URL'] || $json.query.website).slice(7) \n            : 'https://' + ($json['Enter URL'] || $json.query.website)\n      )\n    : '' \n}}",
-              "type": "string"
-            },
-            {
-              "id": "475dd504-85ad-4c08-b858-4ad0bcf4f682",
-              "name": "variable",
-              "value": "={{ $json.params.variable }}",
-              "type": "string"
-            },
-            {
-              "id": "f7ad206d-49a3-459b-94a0-84be77575eec",
-              "name": "authorization",
-              "value": "={{ $json.headers.authorization }}",
-              "type": "string"
-            },
-            {
-              "id": "b3ecfb07-468d-4d7b-9453-50b390de5007",
-              "name": "sheet-url",
-              "value": "={{ $json.headers['sheet-url'] }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1040,
-        540
-      ],
-      "id": "94766e50-aa37-4d1c-9044-95f5aca6cd10",
-      "name": "Set Post fields✅"
-    },
-    {
-      "parameters": {
-        "content": "## usage\n\n- call this endpoint via a post or get request with a query as website \n\n- If you get an error, try installing the m,issing modules\n\n### Note\n#### THIS ONLY WORKS FOR SELF HOSTED INSTANCES",
+        "content": "## usage\n\n- call this endpoint via a post or get request with a query as `website`\n\n- If you get an error, try installing the m,issing modules\n\n### Note\n#### THIS ONLY WORKS FOR SELF HOSTED INSTANCES",
         "height": 220,
-        "width": 260
+        "width": 260,
+        "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        340,
-        400
+        420,
+        80
       ],
       "typeVersion": 1,
       "id": "2fcc22c7-9334-401f-b055-6c3e0d4823ed",
       "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Technical Analysis and geneerate HTML Beautified\n\nconst cheerio = require('cheerio');\nconst axios = require('axios');\n\nreturn Promise.all(items.map(async (item) => {\n  const url = item.json.url;\n\n  if (!url) {\n    return { json: { error: \"No URL provided\" } };\n  }\n\n  try {\n    const response = await axios.get(url);\n    const html = response.data;\n    const $ = cheerio.load(html);\n\n    // Improved title extraction and cleaning\n    let title = $('title').text() || \"No title found\";\n    title = title\n      .replace(/\\s*Icon\\w+/g, '')  // Remove Icon references\n      .replace(/([a-z])([A-Z])/g, '$1 $2')  // Add space between camelCase\n      .replace(/\\s+/g, ' ')  // Remove extra spaces\n      .split(/\\s+/)  // Split into words\n      .filter((word, index, arr) => arr.indexOf(word) === index)  // Remove duplicates\n      .join(' ')  // Join back with spaces\n      .trim();  // Clean up extra spaces\n\n    const metaDescription = $('meta[name=\"description\"]').attr('content') || \"No description found\";\n    const canonical = $('link[rel=\"canonical\"]').attr('href') || \"No canonical URL found\";\n    const headings = [];\n    $('h1, h2, h3, h4, h5, h6').each((i, el) => {\n      headings.push({\n        level: el.name,\n        text: $(el).text().trim()\n      });\n    });\n    const internalLinks = [];\n    const externalLinks = [];\n    $('a').each((i, el) => {\n      const href = $(el).attr('href');\n      const anchorText = $(el).text().trim();\n      if (href) {\n        if (href.startsWith('/') || href.includes(url)) {\n          internalLinks.push({ href, anchorText: anchorText || \"No anchor text\" });\n        } else {\n          externalLinks.push({ href, anchorText: anchorText || \"No anchor text\" });\n        }\n      }\n    });\n\n    const robotsMeta = $('meta[name=\"robots\"]').attr('content') || \"No robots meta found\";\n    const ogTags = {};\n    $('meta[property^=\"og:\"]').each((i, el) => {\n      const property = $(el).attr('property');\n      const content = $(el).attr('content');\n      if (property && content) {\n        ogTags[property.replace('og:', '')] = content;\n      }\n    });\n\n    const structuredData = [];\n    $('script[type=\"application/ld+json\"]').each((i, el) => {\n      try {\n        const json = JSON.parse($(el).html());\n        structuredData.push(json);\n      } catch (error) {\n        // Ignore invalid JSON\n      }\n    });\n\n    const images = [];\n    $('img').each((i, el) => {\n      images.push({\n        src: $(el).attr('src') || \"No source\",\n        alt: $(el).attr('alt') || \"No alt text\",\n        width: $(el).attr('width') || \"No width\",\n        height: $(el).attr('height') || \"No height\"\n      });\n    });\n\n    const viewportMeta = $('meta[name=\"viewport\"]').attr('content') || \"No viewport meta tag\";\n    const wordCount = $('body').text().split(/\\s+/).filter(word => word.length > 0).length;\n    const imagesWithoutAlt = images.filter(img => img.alt === \"No alt text\").length;\n\n    const htmlContent = `\n    <!DOCTYPE html>\n    <html lang=\"en\">\n    <head>\n      <meta charset=\"UTF-8\">\n      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n      <style>\n        :root {\n          --primary-color: #2563eb;\n          --secondary-color: #1e40af;\n          --text-color: #1f2937;\n          --border-color: #e5e7eb;\n          --background-color: #f9fafb;\n          --success-color: #059669;\n        }\n\n        body {\n          font-family: system-ui, -apple-system, sans-serif;\n          margin: 0;\n          padding: 0;\n          background-color: var(--background-color);\n          color: var(--text-color);\n          line-height: 1.5;\n        }\n\n        .container {\n          max-width: 1200px;\n          margin: 2rem auto;\n          padding: 0 1.5rem;\n        }\n\n        .header {\n          background: linear-gradient(to right, var(--primary-color), var(--secondary-color));\n          color: white;\n          padding: 2rem;\n          border-radius: 12px;\n          margin-bottom: 2rem;\n          box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);\n        }\n\n        .header h1 {\n          margin: 0;\n          font-size: 1.875rem;\n          font-weight: 600;\n          word-wrap: break-word;\n          line-height: 1.2;\n        }\n\n        .section {\n          background: white;\n          border-radius: 8px;\n          padding: 1.5rem;\n          margin-bottom: 1.5rem;\n          box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);\n        }\n\n        .section h2 {\n          color: var(--primary-color);\n          font-size: 1.25rem;\n          margin-top: 0;\n          margin-bottom: 1rem;\n          padding-bottom: 0.5rem;\n          border-bottom: 2px solid var(--border-color);\n        }\n\n        .section h3 {\n          color: var(--secondary-color);\n          font-size: 1.125rem;\n          margin: 1.5rem 0 1rem;\n        }\n\n        table {\n          width: 100%;\n          border-collapse: collapse;\n          margin: 1rem 0;\n          font-size: 0.875rem;\n        }\n\n        th, td {\n          padding: 0.75rem 1rem;\n          text-align: left;\n          border: 1px solid var(--border-color);\n          word-break: break-word;\n        }\n\n        th {\n          background-color: var(--background-color);\n          font-weight: 600;\n        }\n\n        tr:hover {\n          background-color: var(--background-color);\n        }\n\n        .image-table img {\n          max-width: 120px;\n          border-radius: 4px;\n          object-fit: cover;\n        }\n\n        ul {\n          list-style-type: none;\n          padding: 0;\n          margin: 0;\n        }\n\n        ul li {\n          padding: 0.5rem 0;\n          border-bottom: 1px solid var(--border-color);\n        }\n\n        ul li:last-child {\n          border-bottom: none;\n        }\n\n        pre {\n          background-color: var(--background-color);\n          padding: 1rem;\n          border-radius: 6px;\n          overflow-x: auto;\n          font-size: 0.875rem;\n          white-space: pre-wrap;\n          word-wrap: break-word;\n        }\n\n        .stats-grid {\n          display: grid;\n          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));\n          gap: 1rem;\n          margin-bottom: 1rem;\n        }\n\n        .stat-card {\n          background: var(--background-color);\n          padding: 1rem;\n          border-radius: 6px;\n          text-align: center;\n        }\n\n        .stat-card .value {\n          font-size: 1.5rem;\n          font-weight: 600;\n          color: var(--primary-color);\n        }\n\n        .stat-card .label {\n          font-size: 0.875rem;\n          color: var(--text-color);\n          margin-top: 0.5rem;\n        }\n\n        @media (max-width: 768px) {\n          .container {\n            padding: 0 1rem;\n          }\n          \n          .header {\n            padding: 1.5rem;\n          }\n          \n          table {\n            display: block;\n            overflow-x: auto;\n          }\n\n          .header h1 {\n            font-size: 1.5rem;\n          }\n        }\n      </style>\n    </head>\n    <body>\n      <div class=\"container\">\n        <div class=\"header\">\n          <h1>Technical SEO Analysis: ${title}</h1>\n        </div>\n        \n        <div class=\"section\">\n          <h2>Key Metrics</h2>\n          <div class=\"stats-grid\">\n            <div class=\"stat-card\">\n              <div class=\"value\">${wordCount}</div>\n              <div class=\"label\">Word Count</div>\n            </div>\n            <div class=\"stat-card\">\n              <div class=\"value\">${imagesWithoutAlt}</div>\n              <div class=\"label\">Images Missing Alt Text</div>\n            </div>\n            <div class=\"stat-card\">\n              <div class=\"value\">${internalLinks.length}</div>\n              <div class=\"label\">Internal Links</div>\n            </div>\n            <div class=\"stat-card\">\n              <div class=\"value\">${externalLinks.length}</div>\n              <div class=\"label\">External Links</div>\n            </div>\n          </div>\n        </div>\n\n        <div class=\"section\">\n          <h2>Meta Information</h2>\n          <table>\n            <tr><th>Title</th><td>${title}</td></tr>\n            <tr><th>Meta Description</th><td>${metaDescription}</td></tr>\n            <tr><th>Canonical URL</th><td>${canonical}</td></tr>\n            <tr><th>Robots Meta</th><td>${robotsMeta}</td></tr>\n            <tr><th>Viewport Meta</th><td>${viewportMeta}</td></tr>\n          </table>\n        </div>\n\n        <div class=\"section\">\n          <h2>Content Structure</h2>\n          <h3>Headings Hierarchy</h3>\n          <ul>\n            ${headings.map(h => `<li><strong>${h.level}</strong>: ${h.text}</li>`).join('')}\n          </ul>\n        </div>\n\n        <div class=\"section\">\n          <h2>Link Analysis</h2>\n          <h3>Internal Links</h3>\n          <table>\n            <tr><th>Anchor Text</th><th>URL</th></tr>\n            ${internalLinks.map(link => `<tr><td>${link.anchorText}</td><td><a href=\"${link.href}\">${link.href}</a></td></tr>`).join('')}\n          </table>\n\n          <h3>External Links</h3>\n          <table>\n            <tr><th>Anchor Text</th><th>URL</th></tr>\n            ${externalLinks.map(link => `<tr><td>${link.anchorText}</td><td><a href=\"${link.href}\">${link.href}</a></td></tr>`).join('')}\n          </table>\n        </div>\n\n        <div class=\"section\">\n          <h2>Open Graph Tags</h2>\n          <table>\n            ${Object.entries(ogTags).map(([key, value]) => `<tr><th>${key}</th><td>${value}</td></tr>`).join('')}\n          </table>\n        </div>\n\n        <div class=\"section\">\n          <h2>Image Analysis</h2>\n          <table class=\"image-table\">\n            <tr><th>Image</th><th>Alt Text</th><th>Dimensions</th></tr>\n            ${images.map(img => `\n              <tr>\n                <td><img src=\"${img.src}\" alt=\"${img.alt}\" width=\"100\"></td>\n                <td>${img.alt}</td>\n                <td>${img.width} × ${img.height}</td>\n              </tr>\n            `).join('')}\n          </table>\n        </div>\n\n        <div class=\"section\">\n          <h2>Structured Data</h2>\n          <pre>${JSON.stringify(structuredData, null, 2)}</pre>\n        </div>\n      </div>\n    </body>\n    </html>\n    `;\n\n    return { json: { html: htmlContent } };\n\n  } catch (error) {\n    return { json: { error: `Failed to fetch URL: ${url}`, details: error.message } };\n  }\n}));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1280,
+        320
+      ],
+      "id": "bcbc924e-d4a4-4870-9034-0863b87aa7c8",
+      "name": "techical analyis ✅"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.html }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        1480,
+        320
+      ],
+      "id": "1409e1cc-22aa-4ca8-b963-d10a3b93237b",
+      "name": "Respond to Webhook✅"
+    },
+    {
+      "parameters": {
+        "content": "## 'Technical Analysis Dashboard✅':\n\n### Understanding the Workflow:\n1. **Node: techical analyis ✅2**\n- **Function**: Executes a JavaScript code block to scrape a given URL for SEO-related data.\n- **Input**: A JSON object containing a URL.\n- **Output**: Extracted information, including title, meta descriptions, canonical links, headings, internal and external links, and image details. This is in a nice HTML table for the users to view\n\n\n\n3. **Node: Receive url to scrap**\n- **Function**: Waits for incoming web requests that will provide the URL to be analyzed.\n- **Input**: Expects a webhook call with user-specified URL.\n- **Output**: Triggers the next nodes upon receiving a request.\n\n4. **Node: Respond to Webhook**\n- **Function**: Sends back a response to the webhook call.\n- **Input/Output**: Takes the processed data from previous nodes and responds accordingly.\n\n5. **Node: Set Get fields**\n- **Function**: Prepares data received from the webhook for processing.\n- **Input**: Incoming parameters.\n- **Output**: Sets fields for further processing.\n\n6. **Node: Set Post fields**\n- **Function**: Similar to the previous node but prepares fields for a POST type.\n\n### Setup Instructions:\n1. **Prerequisites**:\n- You need to have n8n set up and running.\n- Install necessary modules such as `cheerio` and `axios`.\n- Ensure you have API keys or tokens required for authorization.\n\n2. **Importing the Workflow**:\n- Go to n8n, and import the provided JSON definition of the workflow.\n\n3. **Configuring Nodes**:\n- Check webhook configurations to ensure they meet your server settings.\n- Set any required parameters in the Set Get and Set Post fields nodes.\n\n4. **Customizing the Workflow**:\n- If desired, customize the URLs or add additional processing in the JavaScript code as needed.\n\n### Use Case Examples:\n- SEO Agencies looking to analyze multiple URLs for optimization.\n- Digital marketers assessing website content and structure before campaigns.\n- Web developers needing regular site audits for improvements.\n\n### Running and Troubleshooting:\n1. **Running the Workflow**:\n- Trigger the workflow by sending a webhook request with the target URL.\n\n2. **Monitoring Execution**:\n- Use n8n's built-in execution data to monitor the completion and results.\n\n3. **Troubleshooting Tips**:\n- Ensure that the URL provided is correct and reachable.\n- Check console logs for any errors, especially with external requests in the nodes.\n- Validate the input data format for each node to prevent flow breaks.",
+        "height": 312,
+        "width": 252,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        420,
+        320
+      ],
+      "typeVersion": 1,
+      "id": "98f04b51-c999-49b1-8c2d-c70f6067d6f2",
+      "name": "Sticky Note4"
     }
   ],
-  "pinData": {
-    "Receive url to scrap": [
-      {
-        "json": {
-          "headers": {
-            "host": "dev.effibotics.com",
-            "user-agent": "Mozilla/5.0 (compatible; Google-Apps-Script; beanserver; +https://script.google.com; id: UAEmdDd83kAeiOFzGQ7dRbvxqUQxRryvFUQ)",
-            "content-length": "0",
-            "accept-encoding": "gzip, deflate, br",
-            "authorization": "Bearer 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",
-            "content-type": "application/x-www-form-urlencoded",
-            "sheet-url": "https://docs.google.com/spreadsheets/d/17hTuETweUhGASyFIfMfTUdP2CMo1GNMcBj-2ZUTWchY/edit",
-            "x-forwarded-for": "107.178.224.134",
-            "x-forwarded-host": "dev.effibotics.com",
-            "x-forwarded-proto": "https"
-          },
-          "params": {},
-          "query": {
-            "website": "https://www.theonevalley.com/"
-          },
-          "body": {},
-          "webhookUrl": "https://dev.effibotics.com/webhook/effibotics-technical-seo-analysis",
-          "executionMode": "production"
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1",
     "errorWorkflow": "2gLR5bciIZCpJZRE"
@@ -272,7 +165,7 @@
       "name": "SEO DOCTOR"
     }
   ],
-  "triggerCount": 2,
-  "updatedAt": "2024-12-20T05:12:16.093Z",
-  "versionId": "57efbf4c-f994-4b23-b3b7-8e44c3400ff7"
+  "triggerCount": 1,
+  "updatedAt": "2025-01-10T06:03:26.819Z",
+  "versionId": "12d583d2-5f78-401c-8b50-432e4336b227"
 }

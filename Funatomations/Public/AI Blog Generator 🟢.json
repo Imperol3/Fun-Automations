@@ -863,8 +863,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatMistralCloud",
       "typeVersion": 1,
       "position": [
-        340,
-        720
+        -400,
+        -480
       ],
       "id": "1af01e04-1d8f-428c-9f3f-ecf2a7290d19",
       "name": "Mistral Cloud Chat Model1",
@@ -882,8 +882,8 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsMistralCloud",
       "typeVersion": 1,
       "position": [
-        -340,
-        260
+        -480,
+        220
       ],
       "id": "e71a0dfe-414d-466b-be41-c3f567234788",
       "name": "Embeddings Mistral Cloud",
@@ -1306,16 +1306,16 @@
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2024-12-12T05:10:41.468Z",
-      "updatedAt": "2024-12-12T05:10:41.468Z",
-      "id": "745L3wkBRWVTKwlU",
-      "name": "V2"
-    },
-    {
       "createdAt": "2024-12-04T12:32:00.284Z",
       "updatedAt": "2024-12-04T12:32:00.284Z",
       "id": "bNah9fcKNwQQBzJ1",
       "name": "SEO DOCTOR"
+    },
+    {
+      "createdAt": "2024-12-12T05:10:41.468Z",
+      "updatedAt": "2024-12-12T05:10:41.468Z",
+      "id": "745L3wkBRWVTKwlU",
+      "name": "V2"
     },
     {
       "createdAt": "2024-12-03T14:36:18.275Z",
@@ -1325,6 +1325,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-01-07T19:16:46.404Z",
-  "versionId": "25e1de01-56ab-495e-9f27-6671ce5ab53e"
+  "updatedAt": "2025-01-09T18:27:52.420Z",
+  "versionId": "551c1342-9084-40ed-b4b8-c427663d4a8f"
 }

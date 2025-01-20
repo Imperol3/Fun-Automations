@@ -235,8 +235,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        500,
-        280
+        480,
+        220
       ],
       "id": "dd4835c9-a3e7-4032-b3c8-5cc90247aac0",
       "name": "Webhook",
@@ -456,9 +456,9 @@
     },
     {
       "parameters": {
-        "model": "openai/gpt-4o-mini",
+        "model": "deepseek-chat",
         "options": {
-          "baseURL": "https://openrouter.ai/api/v1"
+          "baseURL": "https://api.deepseek.com"
         }
       },
       "id": "93b1bb94-0d7d-4c88-b202-5469466bdf29",
@@ -471,8 +471,8 @@
       ],
       "credentials": {
         "openAiApi": {
-          "id": "1JBBIaXSHGKDHZKq",
-          "name": "Openrouter✅"
+          "id": "ziFiAJg00LS0iYwD",
+          "name": "deepseek  ✅"
         }
       }
     },
@@ -807,7 +807,7 @@
       "typeVersion": 3.4,
       "position": [
         760,
-        140
+        40
       ],
       "id": "aba7eff1-60c6-4333-aad8-fdc4f4b6db6f",
       "name": "Edit Fields3"
@@ -820,7 +820,7 @@
       "typeVersion": 1.2,
       "position": [
         940,
-        140
+        40
       ],
       "id": "c89efc9c-54fb-47fe-ba42-8ce49f18fe92",
       "name": "HTML"
@@ -835,7 +835,7 @@
       "typeVersion": 1.1,
       "position": [
         1100,
-        140
+        40
       ],
       "id": "87c0078d-dc1f-430d-91b4-c8f49c32b675",
       "name": "Respond to Webhook"
@@ -849,8 +849,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        2900,
-        -140
+        2940,
+        -200
       ],
       "id": "440c5aef-b32c-4710-887c-6a905d2e5e3c",
       "name": "Respond to Webhook1"
@@ -1201,9 +1201,9 @@
     },
     {
       "parameters": {
-        "model": "=gpt-3.5-turbo",
+        "model": "deepseek-chat",
         "options": {
-          "baseURL": "https://openrouter.ai/api/v1"
+          "baseURL": "https://api.deepseek.com"
         }
       },
       "id": "1862b16f-5ccc-4e50-b423-c4f5ddc515af",
@@ -1216,20 +1216,28 @@
       ],
       "credentials": {
         "openAiApi": {
-          "id": "1JBBIaXSHGKDHZKq",
-          "name": "Openrouter✅"
+          "id": "ziFiAJg00LS0iYwD",
+          "name": "deepseek  ✅"
         }
       }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.topic }}\n\nAlways send the data using the following format \n\n```\n{\n  \"url\": \"https://www.google.com\",\n  \"module\": \"GoogleScraper\",\n  \"params\": {\n    \"query\": \"your topic\"\n  }\n} \n```\n\nTo get deepr insights about each website that we get, we can use the page_scrapper to go into each of the websites and get the results for each for bettre analysis\n\n\nYou are a Knowledge Research Specialist Agent.\nWhen provided with a topic or headline for an SEO blog article, your mission is to:\n1.\tPerform advanced web searches, leveraging reputable sources and factual databases.\n2.\tExtract actionable insights, cutting-edge data, and uncommon perspectives to craft a unique angle for the topic.\n3.\tAnalyze competitors’ content and highlight gaps or opportunities for improvement.\n4.\tDeliver concise, SEO-rich summaries focusing on key points, emerging trends, and details that position the content as a leading resource in its domain.\nYour ultimate goal is to equip the user with superior material that ensures informational depth, enhances SEO performance, and fosters engagement with the target audience.\n\n\nYou can also use the Wikipedia tool to get deepr insigts onto the desired topic",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        1360,
+        -300
+      ],
+      "id": "6a7261c2-ea51-465b-8b37-e7086ca57354",
+      "name": "Web Researcher1"
     }
   ],
   "pinData": {
-    "Web Researcher": [
-      {
-        "json": {
-          "output": "To provide a more comprehensive and detailed response, I will need to gather more information. I’ll do some research and get back to you shortly."
-        }
-      }
-    ],
     "Set strategy globals": [
       {
         "json": {
@@ -1297,6 +1305,13 @@
           }
         }
       }
+    ],
+    "Web Researcher1": [
+      {
+        "json": {
+          "output": "To provide a more comprehensive and detailed response, I will need to gather more information. I’ll do some research and get back to you shortly."
+        }
+      }
     ]
   },
   "settings": {
@@ -1325,6 +1340,6 @@
     }
   ],
   "triggerCount": 2,
-  "updatedAt": "2025-01-09T18:27:52.420Z",
-  "versionId": "551c1342-9084-40ed-b4b8-c427663d4a8f"
+  "updatedAt": "2025-01-20T08:39:48.344Z",
+  "versionId": "d6e9763b-ea94-4473-83f8-27eb36c79b06"
 }

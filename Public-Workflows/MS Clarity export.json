@@ -1,0 +1,376 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "set API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get clarity Data": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get MS clarity Data ": {
+      "main": [
+        [
+          {
+            "node": "ms clarity2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ms clarity2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Connect to your data storage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "set API": {
+      "main": [
+        [
+          {
+            "node": "Get MS clarity Data ",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get clarity Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-01-14T09:37:32.283Z",
+  "id": "LbnFI8z8YdusJ0iL",
+  "meta": null,
+  "name": "MS Clarity export",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        -120
+      ],
+      "id": "bb6d7902-bfbb-4270-bb57-177ccf2d9902",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://www.clarity.ms/export-data/api/v1/project-live-insights",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "\\numOfDays",
+              "value": "10"
+            },
+            {
+              "name": "dimension2",
+              "value": "Source"
+            },
+            {
+              "name": "dimension3",
+              "value": "Browser"
+            },
+            {
+              "name": "dimension4",
+              "value": "Device"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json['set api'] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        100,
+        -220
+      ],
+      "id": "81a8bfce-4fd0-4c4e-b3dd-adcbad8b8ab7",
+      "name": "Get clarity Data"
+    },
+    {
+      "parameters": {
+        "url": "https://www.clarity.ms/export-data/api/v1/project-live-insights",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "\\numOfDays",
+              "value": "10"
+            },
+            {
+              "name": "dimension3",
+              "value": "Browser"
+            },
+            {
+              "name": "dimension4",
+              "value": "Device"
+            },
+            {
+              "name": "dimension5",
+              "value": "Medium"
+            },
+            {
+              "name": "dimension6",
+              "value": "Channel"
+            },
+            {
+              "name": "dimension1",
+              "value": "URL"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json['set api'] }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {
+          "redirect": {
+            "redirect": {}
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        100,
+        -20
+      ],
+      "id": "5dcce708-2c43-4570-acde-13fc7f89c674",
+      "name": "Get MS clarity Data "
+    },
+    {
+      "parameters": {
+        "content": "## MS CLarity export\n\nWe have two nodes as the API supports only 3 dimentions per call\n- We can only make 10 calls per day per project. Each execution uses two API calls to accomplish the purpose\n",
+        "height": 120,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -400,
+        -320
+      ],
+      "typeVersion": 1,
+      "id": "361cc183-073d-4228-8ac9-75f5fc822307",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "metricName",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        500,
+        -120
+      ],
+      "id": "71108a68-eef7-40ec-9e39-70c73c9fa03c",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fcb72e0c-4ea4-474b-a49b-f0018ccc1011",
+              "name": "metricName",
+              "value": "={{ $json.metricName }}",
+              "type": "string"
+            },
+            {
+              "id": "4c81607b-417a-4163-90b3-5272d483274e",
+              "name": "information _1",
+              "value": "={{ $json.information }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        280,
+        -220
+      ],
+      "id": "ada811ef-285c-48f2-86b4-6b3c1cafa8d8",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fcb72e0c-4ea4-474b-a49b-f0018ccc1011",
+              "name": "metricName",
+              "value": "={{ $json.metricName }}",
+              "type": "string"
+            },
+            {
+              "id": "4c81607b-417a-4163-90b3-5272d483274e",
+              "name": "information _2",
+              "value": "={{ $json.information }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        300,
+        -20
+      ],
+      "id": "0b531d9d-2387-4553-9828-30a7be4f177f",
+      "name": "ms clarity2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        660,
+        -120
+      ],
+      "id": "fd9a207d-eca4-43da-8178-cd659f0ea84b",
+      "name": "Connect to your data storage"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0db970bc-0411-494c-82d2-c48f543fecb4",
+              "name": "set api",
+              "value": "your api",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -180,
+        -120
+      ],
+      "id": "33b3bf72-d20c-4ba5-9444-4a9d6cc441d0",
+      "name": "set API"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-12-04T12:32:00.284Z",
+      "updatedAt": "2024-12-04T12:32:00.284Z",
+      "id": "bNah9fcKNwQQBzJ1",
+      "name": "SEO DOCTOR"
+    },
+    {
+      "createdAt": "2024-12-07T05:13:55.254Z",
+      "updatedAt": "2024-12-07T05:13:55.254Z",
+      "id": "L5zcJfTllY0jsuUO",
+      "name": "SEO REPORTS"
+    },
+    {
+      "createdAt": "2024-12-03T14:36:18.275Z",
+      "updatedAt": "2024-12-03T14:36:18.275Z",
+      "id": "koKAFcp5uch8EPTB",
+      "name": "Public"
+    },
+    {
+      "createdAt": "2024-12-14T05:16:52.018Z",
+      "updatedAt": "2024-12-14T05:16:52.018Z",
+      "id": "kOC8RBaSMppaZ55G",
+      "name": "Template"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-01-14T09:50:49.625Z",
+  "versionId": "67227dbe-ca1a-43ee-a7ee-31b202077f16"
+}

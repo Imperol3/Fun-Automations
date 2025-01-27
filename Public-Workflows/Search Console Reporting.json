@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Split Out": {
       "main": [
@@ -659,7 +659,9 @@
       "parameters": {
         "rule": {
           "interval": [
-            {}
+            {
+              "field": "months"
+            }
           ]
         }
       },
@@ -776,7 +778,7 @@
   "pinData": {},
   "settings": {
     "executionOrder": "v1",
-    "errorWorkflow": "UFY8E1UxgEppEMpW"
+    "errorWorkflow": "2gLR5bciIZCpJZRE"
   },
   "staticData": {
     "node:Schedule Trigger": {
@@ -804,6 +806,6 @@
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2024-12-07T21:00:49.461Z",
-  "versionId": "44451b2d-a684-46e1-8472-e856f2282d74"
+  "updatedAt": "2024-12-20T05:12:16.079Z",
+  "versionId": "8784fc3e-349c-4acb-a340-755f833ec369"
 }

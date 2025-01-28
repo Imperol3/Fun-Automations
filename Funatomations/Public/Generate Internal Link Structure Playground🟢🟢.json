@@ -116,7 +116,7 @@
       "typeVersion": 2,
       "position": [
         -380,
-        -720
+        -860
       ],
       "id": "3c4c420c-68ac-454a-a07b-d9dc22eb4b04",
       "name": "Optimized scraper✅✅1"
@@ -157,8 +157,8 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
       "position": [
-        440,
-        -520
+        740,
+        -880
       ],
       "id": "ac773893-2f1b-495e-876e-24f819ec0e5d",
       "name": "HTML"
@@ -171,8 +171,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.1,
       "position": [
-        500,
-        -200
+        460,
+        -360
       ],
       "id": "c39a5c63-4f9f-4eaf-b6bc-0459e1e80ead",
       "name": "Respond to Webhook"
@@ -206,8 +206,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        440,
-        100
+        460,
+        -80
       ],
       "id": "6edcea1b-4583-4474-9387-2c085d6cbf68",
       "name": "Edit Fields1"
@@ -260,8 +260,8 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        640,
-        80
+        660,
+        -80
       ],
       "id": "4a95ae3e-4582-4d88-bd6b-e73d6bf93c8e",
       "name": "Connect your storage tool"
@@ -317,19 +317,19 @@
   "staticData": null,
   "tags": [
     {
-      "createdAt": "2024-12-03T14:36:18.275Z",
-      "updatedAt": "2024-12-03T14:36:18.275Z",
-      "id": "koKAFcp5uch8EPTB",
-      "name": "Public"
-    },
-    {
       "createdAt": "2024-12-04T12:32:00.284Z",
       "updatedAt": "2024-12-04T12:32:00.284Z",
       "id": "bNah9fcKNwQQBzJ1",
       "name": "SEO DOCTOR"
+    },
+    {
+      "createdAt": "2024-12-03T14:36:18.275Z",
+      "updatedAt": "2024-12-03T14:36:18.275Z",
+      "id": "koKAFcp5uch8EPTB",
+      "name": "Public"
     }
   ],
   "triggerCount": 1,
-  "updatedAt": "2025-01-19T14:01:47.121Z",
-  "versionId": "983b3766-d80d-4d41-9f73-0877c7bb3a8f"
+  "updatedAt": "2025-01-20T06:34:47.563Z",
+  "versionId": "98c42cd5-0b93-4f47-ba23-dda511912581"
 }
